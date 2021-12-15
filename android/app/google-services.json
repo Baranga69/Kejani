@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "474420625962",
+    "firebase_url": "https://wosha-efad6-default-rtdb.firebaseio.com",
+    "project_id": "wosha-efad6",
+    "storage_bucket": "wosha-efad6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474420625962:android:bf7f21f2fd6c720b8fb953",
+        "android_client_info": {
+          "package_name": "com.example.another_nav_bar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474420625962-o3qccd8f2spd7gm9ivv9ikcecj2kacoh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_YkI1iJXRi1CrjY4hTn3OPLOhhH2zsd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474420625962-o3qccd8f2spd7gm9ivv9ikcecj2kacoh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474420625962:android:896498c83630e5fe8fb953",
+        "android_client_info": {
+          "package_name": "com.example.wosha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474420625962-o3qccd8f2spd7gm9ivv9ikcecj2kacoh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_YkI1iJXRi1CrjY4hTn3OPLOhhH2zsd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474420625962-o3qccd8f2spd7gm9ivv9ikcecj2kacoh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
