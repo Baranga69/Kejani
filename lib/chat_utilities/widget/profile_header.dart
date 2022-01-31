@@ -1,7 +1,4 @@
 import 'package:another_nav_bar/models/details.dart';
-import 'package:another_nav_bar/models/message.dart';
-import 'package:another_nav_bar/pages/chats_page.dart';
-import 'package:another_nav_bar/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {

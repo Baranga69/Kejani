@@ -1,4 +1,3 @@
-import 'package:another_nav_bar/api/firebase_api.dart';
 import 'package:another_nav_bar/chat_utilities/widget/messager.dart';
 import 'package:another_nav_bar/models/message.dart';
 import 'package:another_nav_bar/utilities/loading.dart';

@@ -1,4 +1,3 @@
-import 'package:another_nav_bar/pages/chats_page.dart';
 import 'package:another_nav_bar/pages/message_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:another_nav_bar/models/user.dart';

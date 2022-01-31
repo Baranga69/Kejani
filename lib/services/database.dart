@@ -1,6 +1,5 @@
 import 'package:another_nav_bar/models/listings.dart';
 import 'package:another_nav_bar/models/details.dart';
-import 'package:another_nav_bar/models/message.dart';
 import 'package:another_nav_bar/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -86,7 +85,7 @@ class DatabaseService extends GetxController{
   }
 
   //another listing stream
-  Stream<List<ListingData>> get ListData{
+  Stream<List<ListingData>> get listData{
   return usersCollection.snapshots()
   .map(_listingListFromSnapshot);
  }

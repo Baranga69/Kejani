@@ -1,6 +1,5 @@
 import 'package:another_nav_bar/custom/BorderIcon.dart';
 import 'package:another_nav_bar/custom/OptionButton.dart';
-import 'package:another_nav_bar/models/listings.dart';
 import 'package:another_nav_bar/pages/home_screen.dart';
 import 'package:another_nav_bar/services/database.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
@@ -210,7 +209,6 @@ class InformationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
     final Size size = MediaQuery.of(context).size;
     final double tileSize = size.width*0.22;
     return Container(

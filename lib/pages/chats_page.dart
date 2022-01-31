@@ -1,4 +1,3 @@
-import 'package:another_nav_bar/chat_utilities/chats/body.dart';
 import 'package:another_nav_bar/chat_utilities/widget/chat_body_widget.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
 import 'package:another_nav_bar/utilities/loading.dart';

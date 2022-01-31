@@ -1,5 +1,3 @@
-
-import 'package:another_nav_bar/pages/details_page.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
 import 'package:another_nav_bar/utilities/widget_function.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +13,7 @@ class OptionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
+      // ignore: deprecated_member_use
       child: FlatButton(
         color: COLOR_DARK_BLUE,
         splashColor: COLOR_WHITE.withAlpha(55),

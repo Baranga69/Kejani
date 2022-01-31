@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'package:another_nav_bar/api/firebase_api.dart';
 import 'package:another_nav_bar/pages/home_screen.dart';
 import 'package:another_nav_bar/utilities/loading.dart';
-import 'package:another_nav_bar/utilities/widget_function.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,9 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:another_nav_bar/models/listings.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:path/path.dart';
 class NewHouse extends StatefulWidget {
   const NewHouse({ Key? key }) : super(key: key);
@@ -370,13 +366,6 @@ class _NewHouseState extends State<NewHouse> {
       _pickedImage = pickedImageFile;
     });
   }
-
-  void _remove() {
-    setState(() {
-      _pickedImage = null;
-    });
-  }
-
 
   Widget buildButton({
     required String title,

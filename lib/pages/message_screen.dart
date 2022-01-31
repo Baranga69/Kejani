@@ -3,7 +3,6 @@ import 'package:another_nav_bar/chat_utilities/widget/new_message.dart';
 import 'package:another_nav_bar/chat_utilities/widget/profile_header.dart';
 import 'package:another_nav_bar/models/details.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 

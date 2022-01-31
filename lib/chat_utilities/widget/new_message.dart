@@ -1,12 +1,8 @@
-import 'package:another_nav_bar/api/firebase_api.dart';
 import 'package:another_nav_bar/models/details.dart';
-import 'package:another_nav_bar/models/user.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
-import 'package:another_nav_bar/utilities/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:another_nav_bar/models/message.dart';
 
 class NewMessageWidget extends StatefulWidget {
 

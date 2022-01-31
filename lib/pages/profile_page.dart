@@ -1,5 +1,3 @@
-
-import 'package:another_nav_bar/custom/user_list.dart';
 import 'package:another_nav_bar/models/details.dart';
 import 'package:another_nav_bar/pages/login_page.dart';
 import 'package:another_nav_bar/utilities/loading.dart';
@@ -7,8 +5,6 @@ import 'package:another_nav_bar/utilities/user_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:another_nav_bar/services/database.dart';
 
 
 class ProfilePage extends StatelessWidget {

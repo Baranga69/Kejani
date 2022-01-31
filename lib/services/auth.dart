@@ -1,5 +1,4 @@
 import 'package:another_nav_bar/models/user.dart';
-import 'package:another_nav_bar/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -8,6 +7,7 @@ class AuthService {
 
   // create user object based on firebase user
   TheUser? _userFromFirebaseUser(User user){
+    // ignore: unnecessary_null_comparison
     return user != null? TheUser(uid:user.uid): null;
   }
   

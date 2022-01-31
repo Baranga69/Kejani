@@ -93,9 +93,9 @@ class RealEstateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = _auth.currentUser;
-    final _uid = user!.uid;
+    // final FirebaseAuth _auth = FirebaseAuth.instance;
+    // final User? user = _auth.currentUser;
+    // final _uid = user!.uid;
 
     // if(_auth.currentUser== null){
     //   favIcon = Icon(

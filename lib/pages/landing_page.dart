@@ -1,4 +1,4 @@
-import 'package:another_nav_bar/custom/BorderBox.dart';
+//import 'package:another_nav_bar/custom/BorderBox.dart';
 import 'package:another_nav_bar/models/listings.dart';
 import 'package:another_nav_bar/pages/details_page.dart';
 import 'package:another_nav_bar/pages/new_listing.dart';
