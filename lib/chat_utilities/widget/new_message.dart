@@ -75,7 +75,6 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
 
   void _uploadMessage() async{
     final User? user = _auth.currentUser;
-    
     final _uid = user!.uid;
     await FirebaseFirestore.instance.collection('chat_logs').doc(_uid).collection('messages').add({
       "message":"$message",

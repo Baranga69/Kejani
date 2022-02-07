@@ -50,6 +50,10 @@ dependencies:
 
   url_launcher: ^6.0.17
 
+  firebase_database: ^9.0.6
+  
+  firebase_analytics: ^9.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
