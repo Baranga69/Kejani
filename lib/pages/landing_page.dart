@@ -224,17 +224,20 @@ class _HomePageState extends State<HomePage> {
                                               color: COLOR_BLACK,
                                             ),
                                           ),
-                                          addHorizontalSpace(29),
-                                          Container(
-                                            height: 30,
-                                            width: 70,
-                                            margin: EdgeInsets.only(right: 10),
-                                            decoration: BoxDecoration(
-                                              color: COLOR_WHITE,
-                                              borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
-                                            padding: EdgeInsets.all(4.0),
-                                            child: Center(child: Text("${databaseService.listingList[index].listType}")),
+                                          addHorizontalSpace(12),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 30),
+                                            child: Container(
+                                              height: 30,
+                                              width: 70,
+                                              margin: EdgeInsets.only(right: 10),
+                                              decoration: BoxDecoration(
+                                                color: COLOR_WHITE,
+                                                borderRadius: BorderRadius.circular(8),
+                                                border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
+                                              padding: EdgeInsets.all(4.0),
+                                              child: Center(child: Text("${databaseService.listingList[index].listType}")),
+                                            ),
                                           )
                                         ],
                                       ), 
