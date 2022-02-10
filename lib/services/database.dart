@@ -170,3 +170,47 @@ class DatabaseService extends GetxController{
 
 }
 
+class DatabaseService2{
+  final String uid;
+  DatabaseService2({ required this.uid});
+
+  //uploading a new listing 
+  final CollectionReference listingsCollection = FirebaseFirestore.instance.collection('Kejani Listings');
+  Future updateListingData(String name, String address, String amount, String bedrooms, String bathrooms, String area, String garage, String description) async{
+    return await listingsCollection.doc(uid).set({
+       "Listing Name":"$name",
+       "Listing Address":"$address", 
+       "Amount" : "$amount",
+       "BedroomNo":"$bedrooms", 
+       "BathroomNo": "$bathrooms", 
+       "Area":"$area",
+       "Garage" : "$garage",
+       "Description":"$description"
+    });
+  }
+
+   //Listing details from snapshot
+  List<ListingData> _listingListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.docs.map((doc) {
+      return ListingData(
+        listingId: doc.get('ListingId'),
+        name:  doc.get('Listing Name'), 
+        address: doc.get('Listing Address'), 
+        amount:  doc.get('Amount'),
+        bedrooms: doc.get('BedroomNo'), 
+        bathrooms: doc.get('BathroomNo'), 
+        area: doc.get('Area'),
+        url:  doc.get('imageUrl'),
+        garage: doc.get('Garage'),
+        listType: doc.get('listingType'),
+        description: doc.get('Description'),
+      );
+    }).toList();
+  }
+
+   //another listing stream
+  Stream<List<ListingData>> get listData{
+  return listingsCollection.snapshots()
+  .map(_listingListFromSnapshot);
+ }
+}
