@@ -143,113 +143,115 @@ class _HomePageState extends State<HomePage> {
                             elevation: 2,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                        child: Image.network("${databaseService.listingList[index].url}"),
-                                      ),
-                                      Positioned(
-                                        top: 15,
-                                        right: 10,    
-                                        child: Container(
-                                          width: 45,
-                                          height: 45,
-                                          decoration: BoxDecoration(
-                                          color: COLOR_WHITE,
-                                          borderRadius: BorderRadius.circular(12),
-                                          border: Border.all(color: COLOR_GREY.withAlpha(40), width: 2)),
-                                        child: Center(
-                                          child: IconButton(
-                                            icon: Icon(
-                                               Icons.favorite_border_rounded
-                                            ),
-                                            onPressed: () async {
-                                             final CollectionReference userFavorites = FirebaseFirestore.instance.collection('User Favorites');
-                                             await userFavorites.doc(_uid).collection('User Favorites').add({
-                                                "Listing Name":"${databaseService.listingList[index].name}", 
-                                                "Listing Address":"${databaseService.listingList[index].address}",
-                                                "Amount":"${databaseService.listingList[index].amount}", 
-                                                "BedroomNo":"${databaseService.listingList[index].bedrooms}", 
-                                                "BathroomNo": "${databaseService.listingList[index].bathrooms}", 
-                                                "Area":"${databaseService.listingList[index].area}",
-                                                "imageUrl": "${databaseService.listingList[index].url}",
-                                                "Garage": "${databaseService.listingList[index].garage}",
-                                                "Description": "${databaseService.listingList[index].description}",
-                                                "listType":"${databaseService.listingList[index].listType}",
-                                                "ListingId" : "$_uid"
-                                              }); 
-                                            }, 
+                              child: Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          child: Image.network("${databaseService.listingList[index].url}"),
+                                        ),
+                                        Positioned(
+                                          top: 15,
+                                          right: 10,    
+                                          child: Container(
+                                            width: 45,
+                                            height: 45,
+                                            decoration: BoxDecoration(
+                                            color: COLOR_WHITE,
+                                            borderRadius: BorderRadius.circular(12),
+                                            border: Border.all(color: COLOR_GREY.withAlpha(40), width: 2)),
+                                          child: Center(
+                                            child: IconButton(
+                                              icon: Icon(
+                                                 Icons.favorite_border_rounded
+                                              ),
+                                              onPressed: () async {
+                                               final CollectionReference userFavorites = FirebaseFirestore.instance.collection('User Favorites');
+                                               await userFavorites.doc(_uid).collection('User Favorites').add({
+                                                  "Listing Name":"${databaseService.listingList[index].name}", 
+                                                  "Listing Address":"${databaseService.listingList[index].address}",
+                                                  "Amount":"${databaseService.listingList[index].amount}", 
+                                                  "BedroomNo":"${databaseService.listingList[index].bedrooms}", 
+                                                  "BathroomNo": "${databaseService.listingList[index].bathrooms}", 
+                                                  "Area":"${databaseService.listingList[index].area}",
+                                                  "imageUrl": "${databaseService.listingList[index].url}",
+                                                  "Garage": "${databaseService.listingList[index].garage}",
+                                                  "Description": "${databaseService.listingList[index].description}",
+                                                  "listType":"${databaseService.listingList[index].listType}",
+                                                  "ListingId" : "$_uid"
+                                                }); 
+                                              }, 
+                                            )
+                                          )
                                           )
                                         )
-                                        )
-                                      )
-                                    ],
-                                  ),
-                                  addVerticalSpace(10),
-                                  Row(children: [
-                                    Text(
-                                      "${databaseService.listingList[index].name}", 
-                                      style: GoogleFonts.lato(
-                                        fontSize: 24),
-                                      ),
-                                      addHorizontalSpace(70),
+                                      ],
+                                    ),
+                                    addVerticalSpace(10),
+                                    Row(children: [
                                       Text(
-                                        "${databaseService.listingList[index].address}",
-                                        style: GoogleFonts.lato(textStyle: themeData.textTheme.bodyText2),
-                                      ),
-                                    ]
-                                  ),
-                                  addVerticalSpace(5),
-                                  Row(
-                                    children: [
-                                      Text('Asking:', 
+                                        "${databaseService.listingList[index].name}", 
                                         style: GoogleFonts.lato(
-                                          fontSize:20,
-                                          fontWeight: FontWeight.w600,
-                                          color: COLOR_BLACK,
-                                        ),),
-                                      addHorizontalSpace(10),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            //"${formatCurrency(listings.amount)}",
-                                            "${"${databaseService.listingList[index].amount}"} ksh",
-                                            style:GoogleFonts.lato(
-                                              fontSize:22,
-                                              fontWeight: FontWeight.w700,
-                                              color: COLOR_BLACK,
+                                          fontSize: 24),
+                                        ),
+                                        addHorizontalSpace(70),
+                                        Text(
+                                          "${databaseService.listingList[index].address}",
+                                          style: GoogleFonts.lato(textStyle: themeData.textTheme.bodyText2),
+                                        ),
+                                      ]
+                                    ),
+                                    addVerticalSpace(5),
+                                    Row(
+                                      children: [
+                                        Text('Asking:', 
+                                          style: GoogleFonts.lato(
+                                            fontSize:20,
+                                            fontWeight: FontWeight.w600,
+                                            color: COLOR_BLACK,
+                                          ),),
+                                        addHorizontalSpace(10),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              //"${formatCurrency(listings.amount)}",
+                                              "${"${databaseService.listingList[index].amount}"} ksh",
+                                              style:GoogleFonts.lato(
+                                                fontSize:22,
+                                                fontWeight: FontWeight.w700,
+                                                color: COLOR_BLACK,
+                                              ),
                                             ),
-                                          ),
-                                          addHorizontalSpace(12),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 30),
-                                            child: Container(
-                                              height: 30,
-                                              width: 70,
-                                              margin: EdgeInsets.only(right: 10),
-                                              decoration: BoxDecoration(
-                                                color: COLOR_WHITE,
-                                                borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
-                                              padding: EdgeInsets.all(4.0),
-                                              child: Center(child: Text("${databaseService.listingList[index].listType}")),
-                                            ),
-                                          )
-                                        ],
-                                      ), 
-                                    ],
-                                  ),
-                                  addVerticalSpace(5),
-                                  Text(
-                                    "${"${databaseService.listingList[index].bedrooms}"} bedrooms / ${"${databaseService.listingList[index].bathrooms}"} bathrooms / ${"${databaseService.listingList[index].area}"} sqft",
-                                    style: GoogleFonts.lato(textStyle:themeData.textTheme.headline6),
-                                  ),
-                                  addVerticalSpace(5)
-                                ],
+                                            addHorizontalSpace(12),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 30),
+                                              child: Container(
+                                                height: 30,
+                                                width: 70,
+                                                margin: EdgeInsets.only(right: 10),
+                                                decoration: BoxDecoration(
+                                                  color: COLOR_WHITE,
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
+                                                padding: EdgeInsets.all(4.0),
+                                                child: Center(child: Text("${databaseService.listingList[index].listType}")),
+                                              ),
+                                            )
+                                          ],
+                                        ), 
+                                      ],
+                                    ),
+                                    addVerticalSpace(5),
+                                    Text(
+                                      "${"${databaseService.listingList[index].bedrooms}"} bedrooms / ${"${databaseService.listingList[index].bathrooms}"} bathrooms / ${"${databaseService.listingList[index].area}"} sqft",
+                                      style: GoogleFonts.lato(textStyle:themeData.textTheme.headline6),
+                                    ),
+                                    addVerticalSpace(5)
+                                  ],
+                                ),
                               ),
                             ),
                           ),
