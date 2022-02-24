@@ -1,6 +1,7 @@
 //import 'package:another_nav_bar/custom/BorderBox.dart';
 import 'package:another_nav_bar/models/listings.dart';
 import 'package:another_nav_bar/pages/details_page.dart';
+import 'package:another_nav_bar/pages/newListing_stepper.dart';
 import 'package:another_nav_bar/pages/new_listing.dart';
 import 'package:another_nav_bar/services/database.dart';
 import 'package:another_nav_bar/utilities/chip_controller.dart';
@@ -275,7 +276,7 @@ class _HomePageState extends State<HomePage> {
   void goToDetPage(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage()));
 }
 
-void goToList(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => NewHouse()));
+void goToList(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => NewListing()));
 
 class ChoiceOption extends StatelessWidget {
   const ChoiceOption({ Key? key, required this.text }) : super(key: key);
