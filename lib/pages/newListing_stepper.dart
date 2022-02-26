@@ -61,6 +61,27 @@ void goToHome(context) => Navigator.of(context).pushReplacement(MaterialPageRout
         elevation: 0,
       ),
       body: Stepper(
+        controlsBuilder: (BuildContext context, { VoidCallback? onStepContinue, VoidCallback? onStepCancel }){
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: Row(
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: onStepContinue, 
+                  child: const Text('NEXT'),
+                ),
+                if (_currentStep != 0)
+                TextButton(
+                onPressed: onStepCancel, 
+                child: const Text(
+                  'BACK', 
+                  style: TextStyle(color: Colors.grey),
+                ),
+               ),
+              ],
+            ),
+          );
+        },
         onStepTapped: (step) => setState(() => _currentStep = step),
         onStepContinue: () {
           setState(() {
@@ -116,7 +137,7 @@ class _InfoFormState extends State<_InfoForm> {
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: COLOR_BLACK, width: 2),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
             ),
             border: InputBorder.none,
           ),
@@ -134,7 +155,7 @@ class _InfoFormState extends State<_InfoForm> {
           decoration: BoxDecoration(
           color: COLOR_WHITE, 
           border: Border.all(color: COLOR_DARK_BLUE),
-          borderRadius: BorderRadius.all(Radius.circular(15))),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
           child: TextFormField(
           validator: (val) => val!.isEmpty? 'Enter an property name':null,
           style: TextStyle(color: COLOR_BLACK),
@@ -154,7 +175,7 @@ class _InfoFormState extends State<_InfoForm> {
           decoration: BoxDecoration(
           color: COLOR_WHITE, 
           border: Border.all(color: COLOR_DARK_BLUE),
-          borderRadius: BorderRadius.all(Radius.circular(15))),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
           child: TextFormField(
           validator: (val) => val!.isEmpty? 'Enter an property address':null,
           style: TextStyle(color: COLOR_BLACK),
@@ -195,7 +216,7 @@ class _SpecFormState extends State<_SpecForm> {
           decoration: BoxDecoration(
           color: COLOR_WHITE, 
           border: Border.all(color: COLOR_DARK_BLUE),
-          borderRadius: BorderRadius.all(Radius.circular(15))),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
           child: TextFormField(
           keyboardType: TextInputType.number,
           validator: (val) => val!.isEmpty? 'Enter an amount':null,
@@ -217,7 +238,7 @@ class _SpecFormState extends State<_SpecForm> {
         decoration: BoxDecoration(
         color: COLOR_WHITE, 
         border: Border.all(color: COLOR_DARK_BLUE),
-        borderRadius: BorderRadius.all(Radius.circular(15))),
+        borderRadius: BorderRadius.all(Radius.circular(10))),
         child: TextFormField(
         keyboardType: TextInputType.number,
         validator: (val) => val!.isEmpty? 'Enter the number of bedrooms':null,
@@ -239,7 +260,7 @@ class _SpecFormState extends State<_SpecForm> {
         decoration: BoxDecoration(
         color: COLOR_WHITE, 
         border: Border.all(color: COLOR_DARK_BLUE),
-        borderRadius: BorderRadius.all(Radius.circular(15))),
+        borderRadius: BorderRadius.all(Radius.circular(10))),
         child: TextFormField(
         keyboardType: TextInputType.number,
         validator: (val) => val!.isEmpty? 'Enter the number of bathrooms':null,
@@ -261,7 +282,7 @@ class _SpecFormState extends State<_SpecForm> {
         decoration: BoxDecoration(
         color: COLOR_WHITE, 
         border: Border.all(color: COLOR_DARK_BLUE),
-        borderRadius: BorderRadius.all(Radius.circular(15))),
+        borderRadius: BorderRadius.all(Radius.circular(10))),
         child: TextFormField(
         keyboardType: TextInputType.number,
         validator: (val) => val!.isEmpty? 'Enter the area':null,
@@ -283,7 +304,7 @@ class _SpecFormState extends State<_SpecForm> {
           decoration: BoxDecoration(
           color: COLOR_WHITE, 
           border: Border.all(color: COLOR_DARK_BLUE),
-          borderRadius: BorderRadius.all(Radius.circular(15))),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
           child: TextFormField(
           keyboardType: TextInputType.number,
           validator: (val) => val!.isEmpty? 'Enter the number of garages':null,
@@ -356,7 +377,7 @@ class _MediaFormState extends State<_MediaForm> {
         decoration: BoxDecoration(
         color: COLOR_WHITE, 
         border: Border.all(color: COLOR_DARK_BLUE),
-        borderRadius: BorderRadius.all(Radius.circular(15))),
+        borderRadius: BorderRadius.all(Radius.circular(10))),
         child: TextFormField(
         validator: (val) => val!.isEmpty? 'Enter a property description':null,
         style: TextStyle(color: COLOR_BLACK),
