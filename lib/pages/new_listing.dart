@@ -119,7 +119,9 @@ class _NewHouseState extends State<NewHouse> {
                       child: Icon(
                         Icons.add_a_photo_rounded, size: 100,),
                         ),
-                  ),onTap: () => _pickImageGallery(),),
+                  ),
+                  onTap: () => _pickImageGallery(),
+                ),
                 SizedBox(height: 20),
                 Text(fileName, style: TextStyle(fontSize: 16, fontWeight:FontWeight.bold)),
                 SizedBox(height: 20),
