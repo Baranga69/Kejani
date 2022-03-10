@@ -27,6 +27,7 @@ class _NewListingState extends State<NewListing> {
   void goToHome(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: BackButton(onPressed: () => goToHome(context)),
@@ -66,14 +67,7 @@ class _StepperBodyState extends State<StepperBody> {
   String selectedValue = 'For sale';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool loading = false;
-
-  List<DropdownMenuItem<String>> get dropdownItems{
-    List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text('For rent'), value: 'For rent'),
-    DropdownMenuItem(child: Text('For sale'), value: 'For sale'),
-  ];
-  return menuItems;
-  }
+  var items = ["For Rent", "For Sale"];
 
   void _pickImageGallery() async {
   final picker = ImagePicker();
@@ -82,7 +76,7 @@ class _StepperBodyState extends State<StepperBody> {
   setState(() {
     _pickedImage = pickedImageFile;
   });
-}
+ }
   
 
   // @override
@@ -112,32 +106,27 @@ class _StepperBodyState extends State<StepperBody> {
             _inputAddress(),
             SizedBox(height: 10),
             Container(
+              height: 60,
+              width: 350,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
               color: COLOR_WHITE, 
               border: Border.all(color: COLOR_DARK_BLUE),
               borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: DropdownButtonFormField(
-                items: [
-                  DropdownMenuItem<String>(
-                    value: "For Sale",
-                    child: Text(
-                      "For Sale"
-                    )
-                  ),
-                  DropdownMenuItem<String>(
-                    value: "For Rent",
-                    child: Text(
-                      "For Rent"
-                    )
-                  ),
-                ],
+              child: DropdownButton(
+                value: selectedValue,
+                items: items.map((String items){
+                  return DropdownMenuItem(
+                    value: items,
+                    child: Text(items)
+                    );
+                }
+                ).toList(),
                 onChanged: (value) async{
                   setState(() {
                     selectedValue = value as String;
                   });
                 },
-                validator: (value) => value == null ? "Please select a type": null,
               ),
             )
           ],
@@ -203,20 +192,17 @@ class _StepperBodyState extends State<StepperBody> {
       .showSnackBar( SnackBar(content: Text(message)));
     }
 
-    void _submitDetails() async{
-    final FormState? formState = _formKey.currentState!;
-    if(formState!.validate()){
+    void _sendToServer() async{
+    final isValid = _formKey.currentState!.validate();
+    if(isValid){
       _formKey.currentState!.save();
       try{
         if(_pickedImage == null){
           setState(() {
-          showSnackBarMessage("Failed to upload data");
+          showSnackBarMessage("No image selected");
           loading = false;
         });
         } else {
-          setState(() {
-            loading = true;
-          });
           final ref = FirebaseStorage.instance
               .ref()
               .child('images')
@@ -238,6 +224,10 @@ class _StepperBodyState extends State<StepperBody> {
             "UserType":"$selectedValue",
             "ListingId" : "$_uid"
           });
+           setState(() {
+            showSnackBarMessage("Submitting Data");
+            loading = true;
+          });
         }
       } catch (e) {
        setState(() {
@@ -252,24 +242,24 @@ class _StepperBodyState extends State<StepperBody> {
     }
   }
 
-    // void _submitDetails(){
-    //   final FormState? formState = _formKey.currentState;
+    void _submitDetails(){
+      final FormState? formState = _formKey.currentState;
 
-    //   if(!formState!.validate()){
-    //     showSnackBarMessage('Please enter correct data');
-    //   } else {
-    //     formState.save();
-    //     print("Name: ${data.name}");
-    //     print("Address: ${data.address}");
-    //     print("Amount: ${data.amount}");
-    //     print("Area: ${data.area}");
-    //     print("Bedrooms: ${data.bedrooms}");
-    //     print("Bathrooms: ${data.bathrooms}");
-    //     print("Garage: ${data.garage}");
-    //     print("Description: ${data.description}");
+      if(!formState!.validate()){
+        showSnackBarMessage('Please enter correct data');
+      } else {
+        formState.save();
+        print("Listing Name: $name");
+        print("Listing Address: $address");
+        print("Amount: $amount");
+        print("Area: $area");
+        print("BedroomNo: $bedrooms");
+        print("BathroomNo: $bathrooms");
+        print("Garage: $garage");
+        print("Description: $description");
 
-    //   }
-    // }
+      }
+    }
     return Container(
       child: Form(
         key: _formKey,
@@ -363,8 +353,8 @@ class _StepperBodyState extends State<StepperBody> {
         labelText: " Enter a description",
         labelStyle: TextStyle(color: COLOR_BLACK),
         border: InputBorder.none),
-        onSaved: (val){
-            description = val;
+        onChanged: (val){
+          setState(() => description = val);
         },
       ),
     );
@@ -386,8 +376,8 @@ class _StepperBodyState extends State<StepperBody> {
         labelText: " Enter No. of garages",
         labelStyle: TextStyle(color: COLOR_BLACK),
         border: InputBorder.none),
-        onSaved: (val){
-            garage = val;
+        onChanged: (val){
+          setState(() => garage = val);
         },
       ),
     );
@@ -409,8 +399,8 @@ class _StepperBodyState extends State<StepperBody> {
         labelText: " Area in sq.ft",
         labelStyle: TextStyle(color: COLOR_BLACK),
         border: InputBorder.none),
-        onSaved: (val){
-            area = val;
+        onChanged: (val){
+          setState(() =>  area = val);
         },
       ),
     );
@@ -432,8 +422,8 @@ class _StepperBodyState extends State<StepperBody> {
         labelText: " No. of bathrooms",
         labelStyle: TextStyle(color: COLOR_BLACK),
         border: InputBorder.none),
-        onSaved: (val){
-            bathrooms = val;
+        onChanged: (val){
+          setState(() =>  bathrooms = val);
         },
       ),
     );
@@ -455,8 +445,8 @@ class _StepperBodyState extends State<StepperBody> {
         labelText: " No. of bedrooms",
         labelStyle: TextStyle(color: COLOR_BLACK),
         border: InputBorder.none),
-        onSaved: (val){
-            bedrooms = val;
+        onChanged: (val){
+          setState(() => bedrooms = val);
         },
       ),
     );
@@ -478,8 +468,8 @@ class _StepperBodyState extends State<StepperBody> {
         labelText: " Enter an amount",
         labelStyle: TextStyle(color: COLOR_BLACK),
         border: InputBorder.none),
-        onSaved: (val){
-            amount = val;
+        onChanged: (val){
+          setState(() => amount = val);
         },
       ),
     );
@@ -501,8 +491,8 @@ class _StepperBodyState extends State<StepperBody> {
         labelText: " Enter a name",
         labelStyle: TextStyle(color: COLOR_BLACK),
         border: InputBorder.none),
-        onSaved: (val){
-            bathrooms = val;
+        onChanged: (val){
+          setState(() => bathrooms = val);
         },
       ),
     );
@@ -524,8 +514,8 @@ class _StepperBodyState extends State<StepperBody> {
         labelText: " Enter an address",
         labelStyle: TextStyle(color: COLOR_BLACK),
         border: InputBorder.none),
-        onSaved: (val){
-           bathrooms = val;
+        onChanged: (val){
+          setState(() => bathrooms = val);
         },
       ),
     );
