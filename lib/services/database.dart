@@ -38,6 +38,8 @@ class DatabaseService extends GetxController{
     });
   }
 
+  var userDets = <UserData>[].obs;
+
   //userObject lists from snapshot
   List<Details> _userListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.docs.map((doc) {
@@ -86,8 +88,13 @@ class DatabaseService extends GetxController{
 
   //another listing stream
   Stream<List<ListingData>> get listData{
-  return usersCollection.snapshots()
+  return listingsCollection.snapshots()
   .map(_listingListFromSnapshot);
+ }
+
+   Stream<List<Details>> get usersData{
+  return usersCollection.snapshots()
+  .map(_userListFromSnapshot);
  }
   //get listing stream
  Stream<List<ListingData>> getlistData(ListingDets dets){

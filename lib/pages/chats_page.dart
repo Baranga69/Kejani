@@ -32,11 +32,11 @@ class ChatsPage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: snapshot.data!.size,
                   itemBuilder: (context, index){
-                    DocumentSnapshot currentUser = snapshot.data!.docs[index];
-                    String username = currentUser.get('Username');
-                    String urlAvatar = currentUser.get('ImgUrl');
-                    String uid = currentUser.get('uid');
-                    Timestamp lastMessageTime = currentUser.get('lastMessageTime');
+                    DocumentSnapshot users = snapshot.data!.docs[index];
+                    String username = users.get('Username');
+                    String urlAvatar = users.get('ImgUrl');
+                    String uid = users.get('uid');
+                    Timestamp lastMessageTime = users.get('lastMessageTime');
                     UserData userData = new UserData(username: username,urlAvatar: urlAvatar, uid: uid, lastMessageTime: lastMessageTime);
                     return  ChatBodyWidget(users: userData);
                   },

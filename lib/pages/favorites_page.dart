@@ -35,7 +35,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           title: Center(child: Text('Favorites')),
         ),
         body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('User Favorites').doc(_uid).collection('User Favorites').snapshots(),
+          stream: FirebaseFirestore.instance.collection('Favorites').doc(_uid).collection('myFavorites').snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if(!snapshot.hasData){
               return Center(child:Text('Like something....'));
@@ -93,20 +93,20 @@ class RealEstateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    // final FirebaseAuth _auth = FirebaseAuth.instance;
-    // final User? user = _auth.currentUser;
-    // final _uid = user!.uid;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = _auth.currentUser;
+    final _uid = user!.uid;
 
-    // if(_auth.currentUser== null){
-    //   favIcon = Icon(
-    //     FontAwesomeIcons.solidHeart,
-    //     color: Colors.red,
-    //   );
-    // } else {
-    //   favIcon = Icon(
-    //     FontAwesomeIcons.heart,
-    //   );
-    // }
+    if(_auth.currentUser== null){
+       Icon(
+        FontAwesomeIcons.solidHeart,
+        color: Colors.red,
+      );
+    } else {
+       Icon(
+        FontAwesomeIcons.heart,
+      );
+    }
     return GestureDetector(
       //onTap: () => goToDetPage(context),
       child: Card(
@@ -137,6 +137,12 @@ class RealEstateItem extends StatelessWidget {
                       child: IconButton(
                         icon: Icon(FontAwesomeIcons.heart),
                         onPressed: () async {
+                              await FirebaseFirestore.instance
+                              .collection("Favorites")
+                              .doc(_uid)
+                              .collection("myFavorites")
+                              .doc()
+                              .delete();
                           // await FirebaseFirestore.instance.runTransaction(Transaction myTransaction);
                           // final CollectionReference userFavorites = FirebaseFirestore.instance.collection('User Favorites');
                           // await userFavorites.doc(_uid).collection('User Favorites').delete({
@@ -206,6 +212,17 @@ class RealEstateItem extends StatelessWidget {
       ),
     );
   }
-
+  Future deleteData(String id) async{
+    try {
+      await FirebaseFirestore.instance
+      .collection("Favorites")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .collection("myFavorites")
+      .doc(id)
+      .delete();
+    }catch (e){
+      return false;
+    }
+  }
 
 }

@@ -1,4 +1,5 @@
 //import 'package:another_nav_bar/custom/BorderBox.dart';
+import 'package:another_nav_bar/custom/BorderBox.dart';
 import 'package:another_nav_bar/models/listings.dart';
 import 'package:another_nav_bar/pages/details_page.dart';
 import 'package:another_nav_bar/pages/newListing_stepper.dart';
@@ -52,24 +53,24 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 addVerticalSpace(padding),
-                // Padding(
-                //   padding: sidePadding,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       BorderBox(
-                //         height: 50,
-                //         width:50,
-                //         child: Icon(Icons.menu,color:COLOR_BLACK,),
-                //       ),
-                //       BorderBox(
-                //         height: 50,
-                //         width:50,
-                //         child: Icon(Icons.settings,color:COLOR_BLACK,),
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                Padding(
+                  padding: sidePadding,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BorderBox(
+                        height: 50,
+                        width:50,
+                        child: Icon(Icons.menu,color:COLOR_BLACK,),
+                      ),
+                      BorderBox(
+                        height: 50,
+                        width:50,
+                        child: Icon(Icons.settings,color:COLOR_BLACK,),
+                      ),
+                    ],
+                  ),
+                ),
                 addVerticalSpace(20),
                 Padding(
                   padding: sidePadding,
@@ -169,8 +170,8 @@ class _HomePageState extends State<HomePage> {
                                                Icons.favorite_border_rounded
                                             ),
                                             onPressed: () async {
-                                             final CollectionReference userFavorites = FirebaseFirestore.instance.collection('User Favorites');
-                                             await userFavorites.doc(_uid).collection('User Favorites').add({
+                                             final CollectionReference userFavorites = FirebaseFirestore.instance.collection('Favorites');
+                                             await userFavorites.doc(_uid).collection('myFavorites').add({
                                                 "Listing Name":"${databaseService.listingList[index].name}", 
                                                 "Listing Address":"${databaseService.listingList[index].address}",
                                                 "Amount":"${databaseService.listingList[index].amount}", 

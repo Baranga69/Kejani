@@ -64,7 +64,7 @@ class _StepperBodyState extends State<StepperBody> {
   String? garage;
   String? description;
   String? propType;
-  String selectedValue = 'For sale';
+  int? _selectedValue;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool loading = false;
   var items = ["For Rent", "For Sale"];
@@ -114,19 +114,23 @@ class _StepperBodyState extends State<StepperBody> {
               border: Border.all(color: COLOR_DARK_BLUE),
               borderRadius: BorderRadius.all(Radius.circular(10))),
               child: DropdownButton(
-                value: selectedValue,
-                items: items.map((String items){
-                  return DropdownMenuItem(
-                    value: items,
-                    child: Text(items)
-                    );
-                }
-                ).toList(),
+                value: _selectedValue,
+                items: [
+                  DropdownMenuItem(
+                    child: Text("For Sale"),
+                    value: 1,
+                  ),
+                  DropdownMenuItem(
+                    child: Text("For Rent"),
+                    value: 2,
+                  )
+                ],
                 onChanged: (value) async{
                   setState(() {
-                    selectedValue = value as String;
+                    _selectedValue = value as int?;
                   });
                 },
+                hint: Text("Select Type"),
               ),
             )
           ],
@@ -221,7 +225,7 @@ class _StepperBodyState extends State<StepperBody> {
             "imageUrl": "$url",
             "Garage": "$garage",
             "Description": "$description",
-            "UserType":"$selectedValue",
+            "UserType":"$_selectedValue",
             "ListingId" : "$_uid"
           });
            setState(() {
@@ -320,7 +324,7 @@ class _StepperBodyState extends State<StepperBody> {
               height: 50,
               width: 80,
               child: ElevatedButton(
-                onPressed: _submitDetails, 
+                onPressed: _sendToServer, 
                 style: ElevatedButton.styleFrom(
                   primary: COLOR_DARK_BLUE,
                   side: BorderSide(width: 2, color: COLOR_GREY),

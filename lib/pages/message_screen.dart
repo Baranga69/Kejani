@@ -24,7 +24,7 @@ class _ChatPageState extends State<ChatPage> {
         body: SafeArea(
           child: Column(
             children: [
-              ProfileHeaderWidget(details: Details(email: "", username: "", phoneNumber: "", residence: "", imgUrl: "",userType: '', lastMessageTime: DateTime.now()),),
+              ProfileHeaderWidget(),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(10),
