@@ -3,7 +3,6 @@ import 'package:another_nav_bar/models/details.dart';
 import 'package:another_nav_bar/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:another_nav_bar/utilities/chip_controller.dart';
 
 class DatabaseService extends GetxController{

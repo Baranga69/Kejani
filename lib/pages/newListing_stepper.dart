@@ -1,16 +1,11 @@
 import 'dart:io';
 import 'package:another_nav_bar/pages/home_screen.dart';
-import 'package:another_nav_bar/utilities/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 
 List<GlobalKey<FormState>> formKeys = [GlobalKey<FormState>(),GlobalKey<FormState>(),GlobalKey<FormState>()];
 
@@ -246,51 +241,51 @@ class _StepperBodyState extends State<StepperBody> {
     }
   }
 
-    void _submitDetails(){
-      final FormState? formState = _formKey.currentState;
+    // void _submitDetails(){
+    //   final FormState? formState = _formKey.currentState;
 
-      if(!formState!.validate()){
-        showSnackBarMessage('Please enter correct data');
-      } else {
-        formState.save();
-        print("Listing Name: $name");
-        print("Listing Address: $address");
-        print("Amount: $amount");
-        print("Area: $area");
-        print("BedroomNo: $bedrooms");
-        print("BathroomNo: $bathrooms");
-        print("Garage: $garage");
-        print("Description: $description");
+    //   if(!formState!.validate()){
+    //     showSnackBarMessage('Please enter correct data');
+    //   } else {
+    //     formState.save();
+    //     print("Listing Name: $name");
+    //     print("Listing Address: $address");
+    //     print("Amount: $amount");
+    //     print("Area: $area");
+    //     print("BedroomNo: $bedrooms");
+    //     print("BathroomNo: $bathrooms");
+    //     print("Garage: $garage");
+    //     print("Description: $description");
 
-      }
-    }
+    //   }
+    // }
     return Container(
       child: Form(
         key: _formKey,
         child: ListView(
           children: <Widget>[
             Stepper(
-              controlsBuilder: (BuildContext context, { VoidCallback? onStepContinue, VoidCallback? onStepCancel }){
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  children: <Widget>[
-                    ElevatedButton(
-                      onPressed: onStepContinue, 
-                      child: const Text('NEXT'),
-                    ),
-                    if (currentStep != 0)
-                    TextButton(
-                    onPressed: onStepCancel, 
-                    child: const Text(
-                      'BACK', 
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                  ],
-                ),
-              );
-             },
+            //   controlsBuilder: (BuildContext context, { VoidCallback? onStepContinue, VoidCallback? onStepCancel }){
+            //   return Padding(
+            //     padding: const EdgeInsets.symmetric(vertical: 16.0),
+            //     child: Row(
+            //       children: <Widget>[
+            //         ElevatedButton(
+            //           onPressed: onStepContinue, 
+            //           child: const Text('NEXT'),
+            //         ),
+            //         if (currentStep != 0)
+            //         TextButton(
+            //         onPressed: onStepCancel, 
+            //         child: const Text(
+            //           'BACK', 
+            //           style: TextStyle(color: Colors.grey),
+            //         ),
+            //       ),
+            //       ],
+            //     ),
+            //   );
+            //  },
               steps: _steps(),
               type: StepperType.vertical,
               currentStep: this.currentStep,

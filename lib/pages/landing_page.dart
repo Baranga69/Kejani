@@ -3,7 +3,6 @@ import 'package:another_nav_bar/custom/BorderBox.dart';
 import 'package:another_nav_bar/models/listings.dart';
 import 'package:another_nav_bar/pages/details_page.dart';
 import 'package:another_nav_bar/pages/newListing_stepper.dart';
-import 'package:another_nav_bar/pages/new_listing.dart';
 import 'package:another_nav_bar/services/database.dart';
 import 'package:another_nav_bar/utilities/chip_controller.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
@@ -53,25 +52,25 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 addVerticalSpace(padding),
-                Padding(
-                  padding: sidePadding,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BorderBox(
-                        height: 50,
-                        width:50,
-                        child: Icon(Icons.menu,color:COLOR_BLACK,),
-                      ),
-                      BorderBox(
-                        height: 50,
-                        width:50,
-                        child: Icon(Icons.settings,color:COLOR_BLACK,),
-                      ),
-                    ],
-                  ),
-                ),
-                addVerticalSpace(20),
+                // Padding(
+                //   padding: sidePadding,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       BorderBox(
+                //         height: 50,
+                //         width:50,
+                //         child: Icon(Icons.menu,color:COLOR_BLACK,),
+                //       ),
+                //       BorderBox(
+                //         height: 50,
+                //         width:50,
+                //         child: Icon(Icons.settings,color:COLOR_BLACK,),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // addVerticalSpace(20),
                 Padding(
                   padding: sidePadding,
                   child: Text(

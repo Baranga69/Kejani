@@ -183,20 +183,24 @@ class DetailsPage extends StatelessWidget {
 void goToHome(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
 
 _openDialer() async {
-  const uri = 'tel:+254703889605';
-  if (await canLaunch(uri)){
-    await launch(uri);
+  final Uri _teleLaunchUri = Uri(
+    scheme: 'tel',
+    path: '+254 703 889 605');
+  if (await canLaunchUrl(_teleLaunchUri)){
+    await launchUrl(_teleLaunchUri);
   } else {
-    throw 'Could not launch $uri';
+    throw 'Could not launch $_teleLaunchUri';
   }
 }
 
 _openSms() async {
-  const uri = 'smsto:+254703889605';
-  if (await canLaunch(uri)){
-    await launch(uri);
+  final Uri _smsLaunchUri = Uri(
+    scheme: 'sms',
+    path: '+254 703 889 605');
+  if (await canLaunchUrl(_smsLaunchUri)){
+    await launchUrl(_smsLaunchUri);
   } else {
-    throw 'Could not launch $uri';
+    throw 'Could not reach $_smsLaunchUri';
   }
 }
 
