@@ -51,44 +51,43 @@ class _HomePageState extends State<HomePage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                addVerticalSpace(padding),
-                // Padding(
-                //   padding: sidePadding,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       BorderBox(
-                //         height: 50,
-                //         width:50,
-                //         child: Icon(Icons.menu,color:COLOR_BLACK,),
-                //       ),
-                //       BorderBox(
-                //         height: 50,
-                //         width:50,
-                //         child: Icon(Icons.settings,color:COLOR_BLACK,),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // addVerticalSpace(20),
+                addVerticalSpace(5),
                 Padding(
                   padding: sidePadding,
-                  child: Text(
-                    "City",
-                     style: themeData.textTheme.bodyText2,),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BorderBox(
+                        height: 45,
+                        width:45,
+                        child: Icon(Icons.menu,color:COLOR_BLACK,),
+                      ),
+                      BorderBox(
+                        height: 45,
+                        width:45,
+                        child: Icon(Icons.settings,color:COLOR_BLACK,),
+                      ),
+                    ],
+                  ),
                 ),
-                 addVerticalSpace(10),
+                addVerticalSpace(5),
                 Padding(
                   padding: sidePadding,
-                  child: Text(
-                    "Nairobi", 
-                    style: TextStyle(
-                    fontSize:22,
-                    fontWeight: FontWeight.w700,
-                    color: COLOR_BLACK,
+                  child: Row(
+                    children: [
+                      Icon(Icons.location_city),
+                      addHorizontalSpace(10),
+                      Text(
+                      "Nairobi", 
+                      style: TextStyle(
+                      fontSize:22,
+                      fontWeight: FontWeight.w700,
+                      color: COLOR_BLACK,
+                      ),
+                      ),
+                    ],
                   ),
-                  ),
-                ), 
+                ),
                 Padding(
                   padding: sidePadding,
                   child: Divider(
@@ -100,31 +99,34 @@ class _HomePageState extends State<HomePage> {
                 SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  child: Obx(
-                      ()=> Wrap(
-                        spacing: 20,
-                        children: List<Widget>.generate(7,(int index){
-                          return ChoiceChip(
-                            label: Container(
-                              width: 90,
-                              height: 35,
-                              child: Center(
-                                child: Text(
-                                  _chipLabel[index], style: TextStyle(fontSize: 20),),
-                              )),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                            selected: chipController.selectedChip == index,
-                            elevation: 0.5,
-                            selectedColor: Colors.blueGrey[150],
-                            onSelected: (bool selected){
-                              chipController.selectedChip = selected ? index : null;
-                              databaseService.onInit();
-                              databaseService.getlistData(ListingDets.values[chipController.selectedChip]);
-                            },
-                          );
-                        }),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Obx(
+                        ()=> Wrap(
+                          spacing: 10,
+                          children: List<Widget>.generate(7,(int index){
+                            return ChoiceChip(
+                              label: Container(
+                                width: 90,
+                                height: 35,
+                                child: Center(
+                                  child: Text(
+                                    _chipLabel[index], style: TextStyle(fontSize: 20),),
+                                )),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              selected: chipController.selectedChip == index,
+                              elevation: 0.5,
+                              selectedColor: Colors.blueGrey[150],
+                              onSelected: (bool selected){
+                                chipController.selectedChip = selected ? index : null;
+                                databaseService.onInit();
+                                databaseService.getlistData(ListingDets.values[chipController.selectedChip]);
+                              },
+                            );
+                          }),
+                        ),
                       ),
-                    )
+                  )
                   ),
                 addHorizontalSpace(10),
                 Obx(() =>Expanded(
@@ -219,9 +221,11 @@ class _HomePageState extends State<HomePage> {
                                           fontSize:20,
                                           fontWeight: FontWeight.w600,
                                           color: COLOR_BLACK,
-                                        ),),
+                                        ),
+                                      ),
                                       addHorizontalSpace(10),
                                       Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             //"${formatCurrency(listings.amount)}",
@@ -232,20 +236,16 @@ class _HomePageState extends State<HomePage> {
                                               color: COLOR_BLACK,
                                             ),
                                           ),
-                                          addHorizontalSpace(12),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 30),
-                                            child: Container(
-                                              height: 30,
-                                              width: 70,
-                                              margin: EdgeInsets.only(right: 10),
-                                              decoration: BoxDecoration(
-                                                color: COLOR_WHITE,
-                                                borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
-                                              padding: EdgeInsets.all(4.0),
-                                              child: Center(child: Text("${databaseService.listingList[index].listType}")),
-                                            ),
+                                          Container(
+                                            height: 30,
+                                            width: 70,
+                                            margin: EdgeInsets.only(right: 10),
+                                            decoration: BoxDecoration(
+                                              color: COLOR_WHITE,
+                                              borderRadius: BorderRadius.circular(8),
+                                              border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
+                                            padding: EdgeInsets.all(4.0),
+                                            child: Center(child: Text("${databaseService.listingList[index].listType}")),
                                           )
                                         ],
                                       ), 

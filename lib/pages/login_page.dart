@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                     textColor: Colors.white,
                   ),
                   SizedBox(height: 20),
-                  TextButton(onPressed: () => goToPage(context), child: Text('Not registered? Sign Up here',
+                  TextButton(onPressed: () => goToHome(context), child: Text('Not registered? Sign Up here',
                     style: TextStyle(color:COLOR_BLACK, fontSize: 16),)),
                   SizedBox(height: 20),
                   Text(error,
