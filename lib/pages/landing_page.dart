@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     final ChipController chipController = Get.put(ChipController());
     //name of chips as list
     final List<String> _chipLabel = ['All','<2500sqft.','3-5 Beds','<100,000','>1,000,000','For Rent','For Sale'];
-    final double padding = 10;
+    final double padding = 5;
     final sidePadding = EdgeInsets.symmetric(horizontal: padding);
     return SafeArea(
       child: Scaffold(
@@ -75,8 +75,8 @@ class _HomePageState extends State<HomePage> {
                   padding: sidePadding,
                   child: Row(
                     children: [
-                      Icon(Icons.location_city),
-                      addHorizontalSpace(10),
+                      Icon(Icons.location_pin),
+                      addHorizontalSpace(5),
                       Text(
                       "Nairobi", 
                       style: TextStyle(
@@ -158,37 +158,7 @@ class _HomePageState extends State<HomePage> {
                                       Positioned(
                                         top: 15,
                                         right: 10,    
-                                        child: Container(
-                                          width: 45,
-                                          height: 45,
-                                          decoration: BoxDecoration(
-                                          color: COLOR_WHITE,
-                                          borderRadius: BorderRadius.circular(12),
-                                          border: Border.all(color: COLOR_GREY.withAlpha(40), width: 2)),
-                                        child: Center(
-                                          child: IconButton(
-                                            icon: Icon(
-                                               Icons.favorite_border_rounded
-                                            ),
-                                            onPressed: () async {
-                                             final CollectionReference userFavorites = FirebaseFirestore.instance.collection('Favorites');
-                                             await userFavorites.doc(_uid).collection('myFavorites').add({
-                                                "Listing Name":"${databaseService.listingList[index].name}", 
-                                                "Listing Address":"${databaseService.listingList[index].address}",
-                                                "Amount":"${databaseService.listingList[index].amount}", 
-                                                "BedroomNo":"${databaseService.listingList[index].bedrooms}", 
-                                                "BathroomNo": "${databaseService.listingList[index].bathrooms}", 
-                                                "Area":"${databaseService.listingList[index].area}",
-                                                "imageUrl": "${databaseService.listingList[index].url}",
-                                                "Garage": "${databaseService.listingList[index].garage}",
-                                                "Description": "${databaseService.listingList[index].description}",
-                                                "listType":"${databaseService.listingList[index].listType}",
-                                                "ListingId" : "$_uid"
-                                              }); 
-                                            }, 
-                                          )
-                                        )
-                                       )
+                                        child: FavoriteWidget(),
                                       )
                                     ],
                                   ),
@@ -282,6 +252,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void goToDetPage(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage()));
+  
 }
 
 void goToList(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => NewListing()));
@@ -307,17 +278,63 @@ class ChoiceOption extends StatelessWidget {
   }
 }
 
+class FavoriteWidget extends StatefulWidget {
+  const FavoriteWidget({super.key});
 
+  @override
+  State<FavoriteWidget> createState() => _FavoriteWidgetState();
+}
 
-class HomeTile extends StatelessWidget {
-  const HomeTile({ Key? key, required this.content, required this.icon }) : super(key: key);
-  final String content;
-  final IconData icon;
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+  bool _isFavorited = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      
-    );
+      height: 45,
+      width: 45,
+      decoration: BoxDecoration(
+      color: COLOR_WHITE,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: COLOR_GREY.withAlpha(40), width: 2)),
+      child: Center(
+       child: IconButton(
+          padding: const EdgeInsets.all(0),
+          alignment: Alignment.center,
+          icon: (_isFavorited
+              ? const Icon(Icons.favorite)
+              : const Icon(Icons.favorite_border)),
+          color: Colors.red[500],
+          onPressed: _toggleFavorite,
+        ),
+      ),
+    );  
+  }
+
+  void _toggleFavorite(){
+
+    setState((){
+      if(_isFavorited){
+        _isFavorited = true;
+        
+      } else {
+        _isFavorited = false;
+        // final CollectionReference userFavorites = FirebaseFirestore.instance.collection('Favorites');
+        // await userFavorites.doc(_uid).collection('myFavorites').add({
+        //   "Listing Name":"${databaseService.listingList[index].name}", 
+        //   "Listing Address":"${databaseService.listingList[index].address}",
+        //   "Amount":"${databaseService.listingList[index].amount}", 
+        //   "BedroomNo":"${databaseService.listingList[index].bedrooms}", 
+        //   "BathroomNo": "${databaseService.listingList[index].bathrooms}", 
+        //   "Area":"${databaseService.listingList[index].area}",
+        //   "imageUrl": "${databaseService.listingList[index].url}",
+        //   "Garage": "${databaseService.listingList[index].garage}",
+        //   "Description": "${databaseService.listingList[index].description}",
+        //   "listType":"${databaseService.listingList[index].listType}",
+        //   "ListingId" : "$_uid"
+        // }); 
+      }
+    });
+    
   }
 }
