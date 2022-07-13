@@ -37,10 +37,6 @@ class _HomePageState extends State<HomePage> {
     final sidePadding = EdgeInsets.symmetric(horizontal: padding);
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          backgroundColor: COLOR_DARK_BLUE,
-          onPressed: () => goToList(context)),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
@@ -210,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                                           Container(
                                             height: 30,
                                             width: 70,
-                                            margin: EdgeInsets.only(right: 10),
+                                            margin: EdgeInsets.only(left: 10),
                                             decoration: BoxDecoration(
                                               color: COLOR_WHITE,
                                               borderRadius: BorderRadius.circular(8),
@@ -304,7 +300,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
           alignment: Alignment.center,
           icon: (_isFavorited
               ? const Icon(Icons.favorite)
-              : const Icon(Icons.favorite_border)),
+              : const Icon(Icons.favorite_border, color: Colors.black54)),
           color: Colors.red[500],
           onPressed: _toggleFavorite,
         ),
@@ -314,7 +310,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   void _toggleFavorite(){
 
-    setState(() async{
+    setState((){
       if(_isFavorited){
         _isFavorited = false;
         

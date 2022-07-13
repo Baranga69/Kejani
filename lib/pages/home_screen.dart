@@ -1,4 +1,5 @@
 import 'package:another_nav_bar/pages/favorites_page.dart';
+import 'package:another_nav_bar/pages/newListing_stepper.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:another_nav_bar/pages/profile_page.dart';
@@ -28,8 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
       return FavoritesPage();
       case 2:
-      return ChatsPage();
+      return NewListing();
       case 3:
+      return ChatsPage();
+      case 4:
       return ProfilePage();
       case 0:
       default:
@@ -54,6 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
         BottomNavyBarItem(
         icon: Icon(Icons.favorite_outline_rounded),
         title: Text("Favorites"),
+        activeColor: COLOR_BLACK,
+        inactiveColor: COLOR_BLACK,
+        textAlign: TextAlign.center,
+        ),
+        BottomNavyBarItem(
+        icon: Icon(Icons.add),
+        title: Text("Add"),
         activeColor: COLOR_BLACK,
         inactiveColor: COLOR_BLACK,
         textAlign: TextAlign.center,

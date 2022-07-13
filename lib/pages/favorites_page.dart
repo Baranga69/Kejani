@@ -96,6 +96,7 @@ class RealEstateItem extends StatelessWidget {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = _auth.currentUser;
     final _uid = user!.uid;
+    bool _isFavorited = true;
 
     if(_auth.currentUser== null){
        Icon(
@@ -107,6 +108,7 @@ class RealEstateItem extends StatelessWidget {
         FontAwesomeIcons.heart,
       );
     }
+
     return GestureDetector(
       //onTap: () => goToDetPage(context),
       child: Card(
@@ -133,36 +135,20 @@ class RealEstateItem extends StatelessWidget {
                       color: COLOR_WHITE,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: COLOR_GREY.withAlpha(40), width: 2)),
-                    child: Center(
-                      child: IconButton(
-                        icon: Icon(FontAwesomeIcons.heart),
-                        onPressed: () async {
-                              await FirebaseFirestore.instance
-                              .collection("Favorites")
-                              .doc(_uid)
-                              .collection("myFavorites")
-                              .doc()
-                              .delete();
-                          // await FirebaseFirestore.instance.runTransaction(Transaction myTransaction);
-                          // final CollectionReference userFavorites = FirebaseFirestore.instance.collection('User Favorites');
-                          // await userFavorites.doc(_uid).collection('User Favorites').delete({
-                          //   "Listing Name":"${listingData.name}", 
-                          //   "Listing Address":"${listingData.address}",
-                          //   "Amount":"${listingData.amount}", 
-                          //   "BedroomNo":"${listingData.bedrooms}", 
-                          //   "BathroomNo": "${listingData.bathrooms}", 
-                          //   "Area":"${listingData.area}",
-                          //   "imageUrl": "${listingData.url}",
-                          //   "Garage": "${listingData.garage}",
-                          //   "Description": "${listingData.description}",
-                          //   "listType":"${listingData.listType}",
-                          //   "ListingId" : "${listingData.listingId}"
-                          // }); 
-                        }, 
-                      )
-                    )
-                    )
-                  )
+                     child: Center(
+                        child: IconButton(
+                        alignment: Alignment.center,
+                        icon: (_isFavorited
+                            ? const Icon(Icons.favorite)
+                            : const Icon(Icons.favorite_border, color: Colors.black54)),
+                          color: Colors.red[500],
+                          onPressed: () async {
+                              deleteData(_uid);
+                          }, 
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               addVerticalSpace(10),
@@ -225,4 +211,5 @@ class RealEstateItem extends StatelessWidget {
     }
   }
 
+  
 }

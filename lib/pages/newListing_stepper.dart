@@ -315,20 +315,17 @@ class _StepperBodyState extends State<StepperBody> {
                 });
               },
             ), 
-            SizedBox(
-              height: 50,
-              width: 80,
-              child: ElevatedButton(
-                onPressed: _sendToServer, 
-                style: ElevatedButton.styleFrom(
-                  primary: COLOR_DARK_BLUE,
-                  side: BorderSide(width: 2, color: COLOR_GREY),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
+            ElevatedButton(
+              onPressed: _sendToServer, 
+              style: ElevatedButton.styleFrom(
+                primary: COLOR_DARK_BLUE,
+                side: BorderSide(width: 2, color: COLOR_GREY),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text("Submit Data"),
+                minimumSize: Size(40, 50)
               ),
+              child: Text("Submit Data"),
             ),
           ],
         ),
