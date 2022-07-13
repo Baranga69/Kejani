@@ -52,25 +52,25 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 addVerticalSpace(5),
-                Padding(
-                  padding: sidePadding,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BorderBox(
-                        height: 45,
-                        width:45,
-                        child: Icon(Icons.menu,color:COLOR_BLACK,),
-                      ),
-                      BorderBox(
-                        height: 45,
-                        width:45,
-                        child: Icon(Icons.settings,color:COLOR_BLACK,),
-                      ),
-                    ],
-                  ),
-                ),
-                addVerticalSpace(5),
+                // Padding(
+                //   padding: sidePadding,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       BorderBox(
+                //         height: 45,
+                //         width:45,
+                //         child: Icon(Icons.menu,color:COLOR_BLACK,),
+                //       ),
+                //       BorderBox(
+                //         height: 45,
+                //         width:45,
+                //         child: Icon(Icons.settings,color:COLOR_BLACK,),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // addVerticalSpace(5),
                 Padding(
                   padding: sidePadding,
                   child: Row(
@@ -206,6 +206,7 @@ class _HomePageState extends State<HomePage> {
                                               color: COLOR_BLACK,
                                             ),
                                           ),
+                                          addHorizontalSpace(60),
                                           Container(
                                             height: 30,
                                             width: 70,
@@ -313,12 +314,16 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   void _toggleFavorite(){
 
-    setState((){
+    setState(() async{
       if(_isFavorited){
-        _isFavorited = true;
+        _isFavorited = false;
         
       } else {
-        _isFavorited = false;
+        _isFavorited = true;
+        // final FirebaseAuth _auth = FirebaseAuth.instance;
+        // final User? userLog = _auth.currentUser;
+        // final _uid = userLog!.uid;
+        // final DatabaseService databaseService = Get.put(DatabaseService(uid: ''));
         // final CollectionReference userFavorites = FirebaseFirestore.instance.collection('Favorites');
         // await userFavorites.doc(_uid).collection('myFavorites').add({
         //   "Listing Name":"${databaseService.listingList[index].name}", 

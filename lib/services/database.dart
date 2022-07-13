@@ -36,6 +36,7 @@ class DatabaseService extends GetxController{
        "Description":"$description"
     });
   }
+  
 
   var userDets = <UserData>[].obs;
 
@@ -195,7 +196,9 @@ class DatabaseService2{
     });
   }
 
-   //Listing details from snapshot
+
+
+  //Listing details from snapshot
   List<ListingData> _listingListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.docs.map((doc) {
       return ListingData(
