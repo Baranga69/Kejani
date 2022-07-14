@@ -1,4 +1,5 @@
 import 'package:another_nav_bar/models/listings.dart';
+import 'package:another_nav_bar/pages/landing_page.dart';
 import 'package:another_nav_bar/utilities/constants.dart';
 import 'package:another_nav_bar/utilities/loading.dart';
 import 'package:another_nav_bar/utilities/widget_function.dart';
@@ -128,26 +129,7 @@ class RealEstateItem extends StatelessWidget {
                   Positioned(
                     top: 15,
                     right: 10,    
-                    child: Container(
-                      width: 45,
-                      height: 45,
-                      decoration: BoxDecoration(
-                      color: COLOR_WHITE,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: COLOR_GREY.withAlpha(40), width: 2)),
-                     child: Center(
-                        child: IconButton(
-                        alignment: Alignment.center,
-                        icon: (_isFavorited
-                            ? const Icon(Icons.favorite)
-                            : const Icon(Icons.favorite_border, color: Colors.black54)),
-                          color: Colors.red[500],
-                          onPressed: () async {
-                              deleteData(_uid);
-                          }, 
-                        ),
-                      ),
-                    ),
+                    child: FavoriteWidget()
                   ),
                 ],
               ),
