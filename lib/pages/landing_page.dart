@@ -135,6 +135,19 @@ class _HomePageState extends State<HomePage> {
                       itemCount: databaseService.listingList.length,
                       itemBuilder: (BuildContext context, int index){
                         //final bool alreadySaved = 
+                         Color color = Colors.black;
+                          Widget infoSection = Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              VerticalDivider( color: COLOR_BLACK, width: 10.0),
+                              _buildInfoRow(color, Icons.bed_outlined, "${"${databaseService.listingList[index].bedrooms}"}"),
+                              VerticalDivider( color: COLOR_BLACK, width: 10.0),
+                              _buildInfoRow(color, Icons.bathtub_outlined, "${"${databaseService.listingList[index].bathrooms}"}"),
+                              VerticalDivider( color: COLOR_BLACK, width: 10.0),
+                              _buildInfoRow(color, Icons.architecture, "${"${databaseService.listingList[index].area}"}"),
+                              VerticalDivider( color: COLOR_BLACK, width: 10.0),
+                            ],
+                          );
                         return GestureDetector(
                           onTap: () => goToDetPage(context),
                           child: Card(
@@ -163,7 +176,9 @@ class _HomePageState extends State<HomePage> {
                                                       Text(
                                                         "${databaseService.listingList[index].name}", 
                                                         style: GoogleFonts.lato(
-                                                          fontSize: 14),
+                                                          fontSize: 16,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontStyle: FontStyle.italic),
                                                         ),
                                                       
                                                         Text(
@@ -176,9 +191,10 @@ class _HomePageState extends State<HomePage> {
                                                   Padding(
                                                   padding: const EdgeInsets.only(left: 5),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
                                                       children: [
                                                         Row(
+                                                          mainAxisSize: MainAxisSize.max,
                                                           children: [
                                                             Text('Asking:', 
                                                               style: GoogleFonts.lato(
@@ -187,7 +203,7 @@ class _HomePageState extends State<HomePage> {
                                                                 color: COLOR_BLACK,
                                                               ),
                                                             ),
-                                                            addHorizontalSpace(1),
+                                                            addHorizontalSpace(4),
                                                             Text(
                                                               //"${formatCurrency(listings.amount)}",
                                                               "${"${databaseService.listingList[index].amount}"} ksh",
@@ -199,6 +215,7 @@ class _HomePageState extends State<HomePage> {
                                                             ),
                                                           ],
                                                         ),
+                                                        addHorizontalSpace(10),
                                                         Container(
                                                           height: 30,
                                                           width: 70,
@@ -220,23 +237,22 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ],
                                       ),
-                                      // Positioned(
-                                      //   top: 15,
-                                      //   right: 10,    
-                                      //   child: FavoriteWidget(),
-                                      // )
+                                      Positioned(
+                                        top: 0,
+                                        right: 5,    
+                                        child: FavoriteWidget(),
+                                      )
                                     ],
                                   ),
                                 ),
-                                
-                                addVerticalSpace(5),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    "${"${databaseService.listingList[index].bedrooms}"} bedrooms / ${"${databaseService.listingList[index].bathrooms}"} bathrooms / ${"${databaseService.listingList[index].area}"} sqft",
-                                    style: GoogleFonts.lato(textStyle:themeData.textTheme.headline6),
-                                  ),
+                                 Divider(
+                                  color: COLOR_BLACK,
+                                  height: 5.0,
+                                  indent: 25,
+                                  endIndent: 25,
+                                  thickness: 1,
                                 ),
+                                infoSection,
                                 addVerticalSpace(5)
                               ],
                             ),
@@ -259,6 +275,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   void goToDetPage(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage()));
+
+  Row _buildInfoRow(Color color, IconData icon, String label){
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(icon, color: COLOR_GREY, size: 25,),
+        Container(
+          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: color,
+            ),
+          ),
+        )
+      ],
+    );
+  }
   
 }
 
@@ -298,24 +335,18 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 45,
-      width: 45,
-      decoration: BoxDecoration(
-      color: COLOR_WHITE,
-      borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: COLOR_GREY.withAlpha(40), width: 2)),
-      child: Center(
+     
        child: IconButton(
           padding: const EdgeInsets.all(0),
           alignment: Alignment.center,
           icon: (_isFavorited
-              ? const Icon(Icons.favorite)
-              : const Icon(Icons.favorite_border, color: Colors.black54)),
+              ? const Icon(Icons.star)
+              : const Icon(Icons.star_border, color: Colors.black54)),
           color: Colors.red[500],
+          iconSize: 25,
           onPressed: _toggleFavorite,
         ),
-      ),
-    );  
+      );
   }
 
   void _toggleFavorite(){
