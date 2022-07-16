@@ -147,78 +147,88 @@ class _HomePageState extends State<HomePage> {
                                   padding: const EdgeInsets.all(5),
                                   child: Stack(
                                     children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                        child: Image.network("${databaseService.listingList[index].url}"),
-                                      ),
-                                      Positioned(
-                                        top: 15,
-                                        right: 10,    
-                                        child: FavoriteWidget(),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                addVerticalSpace(10),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Row(
-                                    children: [
-                                    Text(
-                                      "${databaseService.listingList[index].name}", 
-                                      style: GoogleFonts.lato(
-                                        fontSize: 24),
-                                      ),
-                                      addHorizontalSpace(70),
-                                      Text(
-                                        "${databaseService.listingList[index].address}",
-                                        style: GoogleFonts.lato(textStyle: themeData.textTheme.bodyText2),
-                                      ),
-                                    ]
-                                  ),
-                                ),
-                                addVerticalSpace(5),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Row(
-                                    children: [
-                                      Text('Asking:', 
-                                        style: GoogleFonts.lato(
-                                          fontSize:20,
-                                          fontWeight: FontWeight.w600,
-                                          color: COLOR_BLACK,
-                                        ),
-                                      ),
-                                      addHorizontalSpace(10),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            //"${formatCurrency(listings.amount)}",
-                                            "${"${databaseService.listingList[index].amount}"} ksh",
-                                            style:GoogleFonts.lato(
-                                              fontSize:22,
-                                              fontWeight: FontWeight.w700,
-                                              color: COLOR_BLACK,
+                                          Image.network("${databaseService.listingList[index].url}", height: 80, width: 100,alignment: Alignment.topLeft),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 5),
+                                            child: Row(
+                                              children: [
+                                              Column(
+                                                crossAxisAlignment:CrossAxisAlignment.start,
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        "${databaseService.listingList[index].name}", 
+                                                        style: GoogleFonts.lato(
+                                                          fontSize: 14),
+                                                        ),
+                                                      
+                                                        Text(
+                                                          "${databaseService.listingList[index].address}",
+                                                          style: GoogleFonts.lato(textStyle: themeData.textTheme.bodyText2),
+                                                        ),
+                                                    ],
+                                                  ),
+                                                  addVerticalSpace(2),
+                                                  Padding(
+                                                  padding: const EdgeInsets.only(left: 5),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Text('Asking:', 
+                                                              style: GoogleFonts.lato(
+                                                                fontSize:12,
+                                                                fontWeight: FontWeight.w600,
+                                                                color: COLOR_BLACK,
+                                                              ),
+                                                            ),
+                                                            addHorizontalSpace(1),
+                                                            Text(
+                                                              //"${formatCurrency(listings.amount)}",
+                                                              "${"${databaseService.listingList[index].amount}"} ksh",
+                                                              style:GoogleFonts.lato(
+                                                                fontSize:16,
+                                                                fontWeight: FontWeight.w700,
+                                                                color: COLOR_BLACK,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Container(
+                                                          height: 30,
+                                                          width: 70,
+                                                          margin: EdgeInsets.only(left: 10),
+                                                          decoration: BoxDecoration(
+                                                            color: COLOR_WHITE,
+                                                            borderRadius: BorderRadius.circular(8),
+                                                            border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
+                                                          padding: EdgeInsets.all(4.0),
+                                                          child: Center(child: Text("${databaseService.listingList[index].listType}")),
+                                                        ), 
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              ]
                                             ),
                                           ),
-                                          addHorizontalSpace(60),
-                                          Container(
-                                            height: 30,
-                                            width: 70,
-                                            margin: EdgeInsets.only(left: 10),
-                                            decoration: BoxDecoration(
-                                              color: COLOR_WHITE,
-                                              borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
-                                            padding: EdgeInsets.all(4.0),
-                                            child: Center(child: Text("${databaseService.listingList[index].listType}")),
-                                          )
                                         ],
-                                      ), 
+                                      ),
+                                      // Positioned(
+                                      //   top: 15,
+                                      //   right: 10,    
+                                      //   child: FavoriteWidget(),
+                                      // )
                                     ],
                                   ),
                                 ),
+                                
                                 addVerticalSpace(5),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
