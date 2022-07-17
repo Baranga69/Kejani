@@ -1,4 +1,6 @@
 //import 'package:another_nav_bar/custom/BorderBox.dart';
+import 'dart:ui';
+
 import 'package:another_nav_bar/custom/BorderBox.dart';
 import 'package:another_nav_bar/models/listings.dart';
 import 'package:another_nav_bar/pages/details_page.dart';
@@ -37,238 +39,200 @@ class _HomePageState extends State<HomePage> {
     final sidePadding = EdgeInsets.symmetric(horizontal: padding);
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
-            width: size.width,
-            height: size.height,
-            child: Stack(
-              children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: COLOR_DARK_BLUE,
+          actions: [
+          Container(
+              padding: sidePadding,
+              child: Row(
                 children: [
-                addVerticalSpace(5),
-                // Padding(
-                //   padding: sidePadding,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       BorderBox(
-                //         height: 45,
-                //         width:45,
-                //         child: Icon(Icons.menu,color:COLOR_BLACK,),
-                //       ),
-                //       BorderBox(
-                //         height: 45,
-                //         width:45,
-                //         child: Icon(Icons.settings,color:COLOR_BLACK,),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // addVerticalSpace(5),
-                Padding(
-                  padding: sidePadding,
-                  child: Row(
-                    children: [
-                      Icon(Icons.location_pin),
-                      addHorizontalSpace(5),
-                      Text(
-                      "Nairobi", 
-                      style: TextStyle(
-                      fontSize:22,
-                      fontWeight: FontWeight.w700,
-                      color: COLOR_BLACK,
-                      ),
-                      ),
-                    ],
+                  Icon(Icons.location_pin),
+                  addHorizontalSpace(5),
+                  Text(
+                  "Nairobi", 
+                  style: TextStyle(
+                  fontSize:22,
+                  fontWeight: FontWeight.w700,
+                  color: COLOR_WHITE,
                   ),
-                ),
-                Padding(
-                  padding: sidePadding,
-                  child: Divider(
-                    height: 25,
-                    color: COLOR_GREY,
                   ),
-                ),
-                //addVerticalSpace(10),
-                SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Obx(
-                        ()=> Wrap(
-                          spacing: 10,
-                          children: List<Widget>.generate(7,(int index){
-                            return ChoiceChip(
-                              label: Container(
-                                width: 90,
-                                height: 35,
-                                child: Center(
-                                  child: Text(
-                                    _chipLabel[index], style: TextStyle(fontSize: 20),),
-                                )),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                              selected: chipController.selectedChip == index,
-                              elevation: 0.5,
-                              selectedColor: Colors.blueGrey[150],
-                              onSelected: (bool selected){
-                                chipController.selectedChip = selected ? index : null;
-                                databaseService.onInit();
-                                databaseService.getlistData(ListingDets.values[chipController.selectedChip]);
-                              },
-                            );
-                          }),
-                        ),
-                      ),
-                  )
-                  ),
-                addHorizontalSpace(10),
-                Obx(() =>Expanded(
-                  child: Padding(
-                    padding: sidePadding,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      physics: BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: databaseService.listingList.length,
-                      itemBuilder: (BuildContext context, int index){
-                        //final bool alreadySaved = 
-                         Color color = Colors.black;
-                          Widget infoSection = Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              VerticalDivider( color: COLOR_BLACK, width: 10.0),
-                              _buildInfoRow(color, Icons.bed_outlined, "${"${databaseService.listingList[index].bedrooms}"}"),
-                              VerticalDivider( color: COLOR_BLACK, width: 10.0),
-                              _buildInfoRow(color, Icons.bathtub_outlined, "${"${databaseService.listingList[index].bathrooms}"}"),
-                              VerticalDivider( color: COLOR_BLACK, width: 10.0),
-                              _buildInfoRow(color, Icons.architecture, "${"${databaseService.listingList[index].area}"}"),
-                              VerticalDivider( color: COLOR_BLACK, width: 10.0),
-                            ],
+                ],
+              ),
+            ),
+          ],
+        ),
+        body: Container(
+          width: size.width,
+          height: size.height,
+          child: Stack(
+            children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              addVerticalSpace(5),
+              SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  child: Obx(
+                      ()=> Wrap(
+                        spacing: 10,
+                        children: List<Widget>.generate(7,(int index){
+                          return ChoiceChip(
+                            label: Container(
+                              width: 85,
+                              height: 30,
+                              child: Center(
+                                child: Text(
+                                  _chipLabel[index], style: TextStyle(fontSize: 17),),
+                              )),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            selected: chipController.selectedChip == index,
+                            elevation: 0.5,
+                            selectedColor: Colors.blueGrey[150],
+                            onSelected: (bool selected){
+                              chipController.selectedChip = selected ? index : null;
+                              databaseService.onInit();
+                              databaseService.getlistData(ListingDets.values[chipController.selectedChip]);
+                            },
                           );
-                        return GestureDetector(
-                          onTap: () => goToDetPage(context),
-                          child: Card(
-                            margin: const EdgeInsets.fromLTRB(2, 8, 2, 8),
-                            elevation: 2,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Stack(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Image.network("${databaseService.listingList[index].url}", height: 80, width: 100,alignment: Alignment.topLeft),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 5),
-                                            child: Row(
+                        }),
+                      ),
+                    ),
+                )
+                ),
+              addHorizontalSpace(5),
+              Obx(() =>Expanded(
+                child: Padding(
+                  padding: sidePadding,
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: databaseService.listingList.length,
+                    itemBuilder: (BuildContext context, int index){
+                      //final bool alreadySaved = 
+                       Color color = Colors.black;
+                        Widget infoSection = Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            VerticalDivider( color: COLOR_BLACK, width: 10.0),
+                            _buildInfoRow(color, Icons.bed_outlined, "${"${databaseService.listingList[index].bedrooms}"}"),
+                            VerticalDivider( color: COLOR_BLACK, width: 10.0),
+                            _buildInfoRow(color, Icons.bathtub_outlined, "${"${databaseService.listingList[index].bathrooms}"}"),
+                            VerticalDivider( color: COLOR_BLACK, width: 10.0),
+                            _buildInfoRow(color, Icons.architecture, "${"${databaseService.listingList[index].area}"}"),
+                            VerticalDivider( color: COLOR_BLACK, width: 10.0),
+                          ],
+                        );
+                      return GestureDetector(
+                        onTap: () => goToDetPage(context),
+                        child: Card(
+                          margin: const EdgeInsets.fromLTRB(2, 8, 2, 8),
+                          elevation: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Stack(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image.network("${databaseService.listingList[index].url}", height: 80, width: 100,alignment: Alignment.topLeft),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 5),
+                                          child: Row(
+                                            children: [
+                                            Column(
+                                              crossAxisAlignment:CrossAxisAlignment.start,
                                               children: [
-                                              Column(
-                                                crossAxisAlignment:CrossAxisAlignment.start,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "${databaseService.listingList[index].name}", 
+                                                      style: GoogleFonts.lato(
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontStyle: FontStyle.italic),
+                                                      ),
                                                       Text(
-                                                        "${databaseService.listingList[index].name}", 
-                                                        style: GoogleFonts.lato(
-                                                          fontSize: 16,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontStyle: FontStyle.italic),
-                                                        ),
-                                                      
-                                                        Text(
-                                                          "${databaseService.listingList[index].address}",
-                                                          style: GoogleFonts.lato(textStyle: themeData.textTheme.bodyText2),
-                                                        ),
-                                                    ],
-                                                  ),
-                                                  addVerticalSpace(2),
-                                                  Padding(
-                                                  padding: const EdgeInsets.only(left: 5),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      children: [
-                                                        Row(
-                                                          mainAxisSize: MainAxisSize.max,
-                                                          children: [
-                                                            Text('Asking:', 
-                                                              style: GoogleFonts.lato(
-                                                                fontSize:12,
-                                                                fontWeight: FontWeight.w600,
-                                                                color: COLOR_BLACK,
-                                                              ),
-                                                            ),
-                                                            addHorizontalSpace(4),
-                                                            Text(
-                                                              //"${formatCurrency(listings.amount)}",
-                                                              "${"${databaseService.listingList[index].amount}"} ksh",
-                                                              style:GoogleFonts.lato(
-                                                                fontSize:16,
-                                                                fontWeight: FontWeight.w700,
-                                                                color: COLOR_BLACK,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        addHorizontalSpace(10),
-                                                        Container(
-                                                          height: 30,
-                                                          width: 70,
-                                                          margin: EdgeInsets.only(left: 10),
-                                                          decoration: BoxDecoration(
-                                                            color: COLOR_WHITE,
-                                                            borderRadius: BorderRadius.circular(8),
-                                                            border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
-                                                          padding: EdgeInsets.all(4.0),
-                                                          child: Center(child: Text("${databaseService.listingList[index].listType}")),
-                                                        ), 
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              ]
+                                                        "${databaseService.listingList[index].address}",
+                                                        style: GoogleFonts.lato(textStyle: themeData.textTheme.bodyText2),
+                                                      ),
+                                                  ],
+                                                ),
+                                                addVerticalSpace(2),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      //"${formatCurrency(listings.amount)}",
+                                                      "${"${databaseService.listingList[index].amount}"} KES",
+                                                      style:GoogleFonts.lato(
+                                                        fontSize:16,
+                                                        fontWeight: FontWeight.w700,
+                                                        color: COLOR_BLACK,
+                                                      ),
+                                                    ),  
+                                                  ],
+                                                ),
+                                              ],
                                             ),
+                                            ]
                                           ),
+                                        ),
+                                      ],
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 2,    
+                                      child: Column(
+                                        children: [
+                                          FavoriteWidget(),
+                                          addHorizontalSpace(10),
+                                          Container(
+                                            height: 25,
+                                            width: 55,
+                                            margin: EdgeInsets.only(left:20),
+                                            decoration: BoxDecoration(
+                                              color: COLOR_WHITE,
+                                              borderRadius: BorderRadius.circular(5),
+                                              border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
+                                            padding: EdgeInsets.all(4.0),
+                                            child: Center(child: Text("${databaseService.listingList[index].listType}", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),)),
+                                          ), 
                                         ],
                                       ),
-                                      Positioned(
-                                        top: 0,
-                                        right: 5,    
-                                        child: FavoriteWidget(),
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                 Divider(
-                                  color: COLOR_BLACK,
-                                  height: 5.0,
-                                  indent: 25,
-                                  endIndent: 25,
-                                  thickness: 1,
-                                ),
-                                infoSection,
-                                addVerticalSpace(5)
-                              ],
-                            ),
+                              ),
+                               Divider(
+                                color: COLOR_BLACK,
+                                height: 5.0,
+                                indent: 25,
+                                endIndent: 25,
+                                thickness: 1,
+                              ),
+                              infoSection,
+                              addVerticalSpace(5)
+                            ],
                           ),
-                        );
-                      },
-                    )
-                  ),
+                        ),
+                      );
+                    },
+                  )
                 ),
-               ),
-
-              ],
+              ),
              ),
             ],
            ),
-          ),
+          ],
+         ),
         ),
       ),
     );
@@ -342,7 +306,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
           icon: (_isFavorited
               ? const Icon(Icons.star)
               : const Icon(Icons.star_border, color: Colors.black54)),
-          color: Colors.red[500],
+          color: COLOR_DARK_BLUE,
           iconSize: 25,
           onPressed: _toggleFavorite,
         ),
