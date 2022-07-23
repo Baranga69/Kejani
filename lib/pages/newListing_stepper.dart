@@ -221,7 +221,7 @@ class _StepperBodyState extends State<StepperBody> {
             "Garage": "$garage",
             "Description": "$description",
             "UserType":"$_selectedValue",
-            "ListingId" : "$_uid"
+            //"ListingId" : "$_uid"
           });
            setState(() {
             showSnackBarMessage("Submitting Data");

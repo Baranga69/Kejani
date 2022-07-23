@@ -12,6 +12,7 @@ import 'package:another_nav_bar/utilities/widget_function.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -218,7 +219,30 @@ class _HomePageState extends State<HomePage> {
                                 endIndent: 25,
                                 thickness: 1,
                               ),
-                              infoSection,
+                              Row(
+                                children: [
+                                  infoSection,
+                                  addHorizontalSpace(80),
+                                  RatingBar.builder(
+                                    initialRating: 3,
+                                    itemSize: 15.0,
+                                    minRating: 1,
+                                    glow: true,
+                                    glowRadius: 2,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                                    itemBuilder: (context, _)=> Icon(
+                                      Icons.star,
+                                      color: Colors.blueGrey,
+                                    ),
+                                    onRatingUpdate: (rating){
+                                      print(rating);
+                                    },
+                                  ),
+                                ],
+                              ),
                               addVerticalSpace(5)
                             ],
                           ),
@@ -237,7 +261,17 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
+  showRatingDialog(){
+    showDialog(
+      context: context,
+      builder: (context){
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0),),
+          ),
+        );
+      });
+  }
   void goToDetPage(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage()));
 
   Row _buildInfoRow(Color color, IconData icon, String label){
