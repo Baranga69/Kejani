@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                             VerticalDivider( color: COLOR_BLACK, width: 10.0),
                             _buildInfoRow(color, Icons.bathtub_outlined, "${"${databaseService.listingList[index].bathrooms}"}"),
                             VerticalDivider( color: COLOR_BLACK, width: 10.0),
-                            _buildInfoRow(color, Icons.architecture, "${"${databaseService.listingList[index].area}"}"),
+                            _buildInfoRow(color, Icons.architecture, "${"${databaseService.listingList[index].area} sqft"}"),
                             VerticalDivider( color: COLOR_BLACK, width: 10.0),
                           ],
                         );
@@ -222,24 +222,26 @@ class _HomePageState extends State<HomePage> {
                               Row(
                                 children: [
                                   infoSection,
-                                  addHorizontalSpace(80),
-                                  RatingBar.builder(
-                                    initialRating: 3,
-                                    itemSize: 15.0,
-                                    minRating: 1,
-                                    glow: true,
-                                    glowRadius: 2,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemCount: 5,
-                                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                                    itemBuilder: (context, _)=> Icon(
-                                      Icons.star,
-                                      color: Colors.blueGrey,
+                                  addHorizontalSpace(70),
+                                  GestureDetector(
+                                    onLongPress: () => showRatingDialog(),
+                                    child: RatingBar.builder(
+                                      initialRating: 3,
+                                      itemSize: 15.0,
+                                      minRating: 1,
+                                      glow: true,
+                                      glowRadius: 2,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: true,
+                                      itemCount: 5,
+                                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                                      itemBuilder: (context, _)=> Icon(
+                                        Icons.star,
+                                        color: Colors.deepPurpleAccent),
+                                      onRatingUpdate: (rating){
+                                        print(rating);
+                                      },
                                     ),
-                                    onRatingUpdate: (rating){
-                                      print(rating);
-                                    },
                                   ),
                                 ],
                               ),
@@ -269,10 +271,38 @@ class _HomePageState extends State<HomePage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0),),
           ),
+          contentPadding: EdgeInsets.only(top: 10),
+          title: Text("Rating Metrics",
+          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),),
+          content: Container(
+            height: 300,
+            width: 250,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                  ratingColumn("Water"),
+                   addVerticalSpace(10.0),
+                  ratingColumn("Electricity"),
+                   addVerticalSpace(10.0),
+                  ratingColumn("Security"),
+                   addVerticalSpace(10.0),
+                  ratingColumn("Road Access"),
+                  addVerticalSpace(10.0),
+                  ratingColumn("Ammenities"),
+                ],
+              ),
+            ),
+          ),
         );
       });
   }
   void goToDetPage(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage()));
+
+  
 
   Row _buildInfoRow(Color color, IconData icon, String label){
     return Row(
@@ -281,7 +311,7 @@ class _HomePageState extends State<HomePage> {
       children: [
         Icon(icon, color: COLOR_GREY, size: 25,),
         Container(
-          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          margin: const EdgeInsets.all(5),
           child: Text(
             label,
             style: TextStyle(
@@ -295,6 +325,39 @@ class _HomePageState extends State<HomePage> {
     );
   }
   
+  ratingColumn(String label){
+    return Column(
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+          color: COLOR_DARK_BLUE,
+          ),
+          textAlign: TextAlign.start,
+        ),
+        RatingBar.builder(
+          initialRating: 3,
+          itemSize: 20.0,
+          minRating: 1,
+          glow: true,
+          glowRadius: 2,
+          direction: Axis.horizontal,
+          allowHalfRating: true,
+          itemCount: 5,
+          itemPadding: EdgeInsets.fromLTRB(20.0, 3.0, 5.0, 5.0),
+          itemBuilder: (context, _)=> Icon(
+            Icons.star,
+            color: Colors.deepPurple,
+          ),
+          onRatingUpdate: (rating){
+            print(rating);
+          },
+        ),
+      ]
+    );
+  }
 }
 
 void goToList(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => NewListing()));
