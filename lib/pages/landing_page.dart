@@ -131,8 +131,9 @@ class _HomePageState extends State<HomePage> {
                       return GestureDetector(
                         onTap: () => goToDetPage(context),
                         child: Card(
-                          margin: const EdgeInsets.fromLTRB(2, 8, 2, 8),
-                          elevation: 2,
+                          borderOnForeground: true,
+                          margin: const EdgeInsets.fromLTRB(2, 5, 2, 5),
+                          elevation: 3,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -142,7 +143,12 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Row(
                                       children: [
-                                        Image.network("${databaseService.listingList[index].url}", height: 80, width: 100,alignment: Alignment.topLeft),
+                                        Container(
+                                           height: 80, width: 100,
+                                           decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10.0),
+                                          ),
+                                          child: Image.network("${databaseService.listingList[index].url}",alignment: Alignment.topLeft)),
                                         Padding(
                                           padding: const EdgeInsets.only(left: 5),
                                           child: Row(
@@ -193,16 +199,16 @@ class _HomePageState extends State<HomePage> {
                                       right: 2,    
                                       child: Column(
                                         children: [
-                                          FavoriteWidget(),
+                                          Center(child: FavoriteWidget()),
                                           addHorizontalSpace(10),
                                           Container(
-                                            height: 25,
-                                            width: 55,
+                                            height: 23,
+                                            width: 54,
                                             margin: EdgeInsets.only(left:20),
                                             decoration: BoxDecoration(
                                               color: COLOR_WHITE,
                                               borderRadius: BorderRadius.circular(5),
-                                              border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
+                                              border: Border.all(color: COLOR_DARK_BLUE, width: 2)),
                                             padding: EdgeInsets.all(4.0),
                                             child: Center(child: Text("${databaseService.listingList[index].listType}", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),)),
                                           ), 
@@ -221,12 +227,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Row(
                                 children: [
-                                  infoSection,
-                                  addHorizontalSpace(70),
+                                  Expanded(child: infoSection),
                                   GestureDetector(
                                     onLongPress: () => showRatingDialog(),
                                     child: RatingBar.builder(
-                                      initialRating: 3,
+                                      initialRating: 1.5,
                                       itemSize: 15.0,
                                       minRating: 1,
                                       glow: true,
@@ -237,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                                       itemBuilder: (context, _)=> Icon(
                                         Icons.star,
-                                        color: Colors.deepPurpleAccent),
+                                        color: COLOR_DARK_BLUE),
                                       onRatingUpdate: (rating){
                                         print(rating);
                                       },
@@ -315,8 +320,8 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
               color: color,
             ),
           ),
@@ -338,7 +343,7 @@ class _HomePageState extends State<HomePage> {
           textAlign: TextAlign.start,
         ),
         RatingBar.builder(
-          initialRating: 3,
+          initialRating: 1.0,
           itemSize: 20.0,
           minRating: 1,
           glow: true,
@@ -349,7 +354,7 @@ class _HomePageState extends State<HomePage> {
           itemPadding: EdgeInsets.fromLTRB(20.0, 3.0, 5.0, 5.0),
           itemBuilder: (context, _)=> Icon(
             Icons.star,
-            color: Colors.deepPurple,
+            color: COLOR_DARK_BLUE,
           ),
           onRatingUpdate: (rating){
             print(rating);

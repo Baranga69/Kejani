@@ -105,7 +105,7 @@ class DatabaseService extends GetxController{
      .map(_listingListFromSnapshot);
 
      case ListingDets.AREA:
-     return listingsCollection.where('Area', isLessThanOrEqualTo: '2500').snapshots()
+     return listingsCollection.where('Area', isLessThan: '2500').snapshots()
      .map(_listingListFromSnapshot);
 
      case ListingDets.BEDROOMS:
