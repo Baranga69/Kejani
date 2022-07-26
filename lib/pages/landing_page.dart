@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: COLOR_DARK_BLUE,
           actions: [
           Container(
-              padding: sidePadding,
+              padding: EdgeInsets.only(right:270),
               child: Row(
                 children: [
                   Icon(Icons.location_pin),
@@ -242,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                                       itemBuilder: (context, _)=> Icon(
                                         Icons.star,
-                                        color: COLOR_DARK_BLUE),
+                                        color: Colors.blueAccent),
                                       onRatingUpdate: (rating){
                                         print(rating);
                                       },
@@ -314,7 +314,7 @@ class _HomePageState extends State<HomePage> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Icon(icon, color: COLOR_GREY, size: 25,),
+        Icon(icon, color: Colors.blueAccent, size: 25,),
         Container(
           margin: const EdgeInsets.all(5),
           child: Text(
@@ -338,7 +338,7 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          color: COLOR_DARK_BLUE,
+          color: Colors.blueAccent,
           ),
           textAlign: TextAlign.start,
         ),
