@@ -1,7 +1,5 @@
-import 'package:another_nav_bar/models/details.dart';
 import 'package:another_nav_bar/pages/login_page.dart';
 import 'package:another_nav_bar/utilities/loading.dart';
-import 'package:another_nav_bar/utilities/user_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +7,6 @@ import 'package:another_nav_bar/utilities/constants.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({ Key? key }) : super(key: key);
-
-   
 
   @override
   Widget build(BuildContext context) {

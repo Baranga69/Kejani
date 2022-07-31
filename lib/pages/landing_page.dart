@@ -1,6 +1,5 @@
 //import 'package:another_nav_bar/custom/BorderBox.dart';
 import 'dart:ui';
-
 import 'package:another_nav_bar/custom/BorderBox.dart';
 import 'package:another_nav_bar/models/listings.dart';
 import 'package:another_nav_bar/pages/details_page.dart';
@@ -128,8 +127,8 @@ class _HomePageState extends State<HomePage> {
                             VerticalDivider( color: COLOR_BLACK, width: 10.0),
                           ],
                         );
-                      return GestureDetector(
-                        onTap: () => goToDetPage(context),
+                      return GestureDetector( 
+                        onTap: () => goToDetPage(context,"${"${databaseService.listingList[index].listingId}"}"),
                         child: Card(
                           borderOnForeground: true,
                           margin: const EdgeInsets.fromLTRB(2, 5, 2, 5),
@@ -305,7 +304,7 @@ class _HomePageState extends State<HomePage> {
         );
       });
   }
-  void goToDetPage(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage()));
+  void goToDetPage(context, String listingId) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage()));
 
   
 
@@ -314,7 +313,7 @@ class _HomePageState extends State<HomePage> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Icon(icon, color: Colors.blueAccent, size: 25,),
+        Icon(icon, color: Colors.deepPurple, size: 25,),
         Container(
           margin: const EdgeInsets.all(5),
           child: Text(

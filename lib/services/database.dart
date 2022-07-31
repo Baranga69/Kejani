@@ -105,7 +105,7 @@ class DatabaseService extends GetxController{
      .map(_listingListFromSnapshot);
 
      case ListingDets.AREA:
-     return listingsCollection.where('Area', isLessThan: '2500').snapshots()
+     return listingsCollection.where('Area', isLessThanOrEqualTo: '2500').snapshots()
      .map(_listingListFromSnapshot);
 
      case ListingDets.BEDROOMS:
@@ -113,11 +113,11 @@ class DatabaseService extends GetxController{
      .map(_listingListFromSnapshot);
 
      case ListingDets.PRICE:
-     return listingsCollection.where('Amount', isLessThan: '100,000').snapshots()
+     return listingsCollection.where('Amount', isLessThanOrEqualTo: '100,000').snapshots()
      .map(_listingListFromSnapshot);
 
      case ListingDets.PRICE2:
-     return listingsCollection.where('Amount', isGreaterThan: '1,000,000').snapshots()
+     return listingsCollection.where('Amount', isGreaterThanOrEqualTo: '1,000,000').snapshots()
      .map(_listingListFromSnapshot);
 
      case ListingDets.TYPE1:
