@@ -242,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                                       itemBuilder: (context, _)=> Icon(
                                         Icons.star,
-                                        color: Colors.blueAccent),
+                                        color: Colors.deepPurple),
                                       onRatingUpdate: (rating){
                                         print(rating);
                                       },
