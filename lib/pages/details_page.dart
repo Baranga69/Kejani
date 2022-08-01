@@ -18,9 +18,6 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final listingID = ModalRoute.of(context)?.settings.arguments;
-    if (kDebugMode){
-      print(listingID);
-    }
     final CollectionReference ref = FirebaseFirestore.instance.collection('Kejani Listings');
     final listing = ref.where('listingId', isEqualTo: listingID);
     final Size size = MediaQuery.of(context).size;
@@ -28,21 +25,161 @@ class DetailsPage extends StatelessWidget {
     final DatabaseService databaseService = Get.put(DatabaseService(uid: ''));
     final double padding = 10;
     final sidePadding = EdgeInsets.symmetric(horizontal: padding);
- return SafeArea(
-      child: Scaffold(
-      backgroundColor: COLOR_WHITE,
-        body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('Kejani Listings').where('listingId', isEqualTo: listingID).snapshots(),
-          builder: (context, snapshot){
-            if (!snapshot.hasData){
-              return Text('No Data...');
-            } else {
-              CollectionReference listRef = FirebaseFirestore.instance.collection('Kejani Listings')
-            }
-          },
+    return SafeArea(
+          child: Scaffold(
+            backgroundColor: COLOR_WHITE,
+            body: Container(
+              width: size.width,
+              height: size.height,
+                  child:SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: databaseService.listingList.length,
+                      itemBuilder: (BuildContext context, int index) {  
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Image.network("${databaseService.listingList[index].url}"),
+                              Positioned(
+                                width: size.width,
+                                top: padding,
+                                child: Padding(
+                                  padding: sidePadding,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                        onTap: () => goToHome(context),
+                                        child: BorderIcon(
+                                          height: 50,
+                                          width: 50,
+                                          child: Icon(Icons.keyboard_backspace,color: COLOR_BLACK,),
+                                    
+                                        ),
+                                      ),
+                                      BorderIcon(
+                                        height: 50,
+                                        width: 50,
+                                        child: Icon(Icons.favorite_border,color:COLOR_BLACK,),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          addVerticalSpace(padding),
+                          Padding(
+                            padding: sidePadding,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "${databaseService.listingList[index].name}",
+                                          style: GoogleFonts.lato(textStyle: themeData.textTheme.headline4)),
+                                        addHorizontalSpace(25),
+                                        Text("${databaseService.listingList[index].address}",style: GoogleFonts.lato(textStyle: themeData.textTheme.subtitle2))
+                                      ]
+                                    ),
+                                    addVerticalSpace(5),
+                                    Row(
+                                      children: [
+                                        Text("${"${databaseService.listingList[index].amount}"} ksh",style: GoogleFonts.lato(textStyle: themeData.textTheme.headline4)),
+                                        addHorizontalSpace(60),
+                                        Container(
+                                          height: 30,
+                                          width: 70,
+                                          margin: EdgeInsets.only(right: 10),
+                                          decoration: BoxDecoration(
+                                            color: COLOR_WHITE,
+                                            borderRadius: BorderRadius.circular(10),
+                                            border: Border.all(color: COLOR_DARK_BLUE, width: 3)),
+                                          padding: EdgeInsets.all(4.0),
+                                          child: Center(child: Text("${databaseService.listingList[index].listType}")),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              // BorderIcon(child: Text("20 Hours ago", style: themeData.textTheme.headline5,),padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),)
+                              ],
+                            ),
+                          ),
+                          addVerticalSpace(padding),
+                          Padding(
+                            padding: sidePadding,
+                            child: Text("Amenities",style: themeData.textTheme.headline4,),
+                          ),
+                          addVerticalSpace(padding),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            child: Row(
+                              children: [
+                                InformationTile(content: "${"${databaseService.listingList[index].area}"} sq ft.", icon: Icons.architecture,),
+                                InformationTile(content: "${"${databaseService.listingList[index].bedrooms}"} bedrooms", icon: Icons.bed,),
+                                InformationTile(content: "${"${databaseService.listingList[index].bathrooms}"} bathrooms", icon: Icons.bathtub_outlined,),
+                                InformationTile(content: "${"${databaseService.listingList[index].garage}"} garages", icon: Icons.garage_outlined,),
+                              ],
+                            ),
+                          ),
+                          addVerticalSpace(padding),
+                          Padding(
+                            padding: sidePadding,
+                            child: Text("${databaseService.listingList[index].description}",
+                            textAlign: TextAlign.justify,style: themeData.textTheme.bodyText2,),
+                          ),
+                          addVerticalSpace(100),
+                        ],
+                        );
+                    }
+                  ),
+                //   Positioned(
+                //     bottom: 20,
+                //     width: size.width,
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         GestureDetector(
+                //           onTap: () {
+                            
+                //           },
+                //           child: OptionButton(
+                //             text: "Message", 
+                //             icon: Icons.message, 
+                //             width: size.width*0.35,)),
+                //         addHorizontalSpace(25),
+                //         GestureDetector(
+                //           onTap: () {
+                //             _openDialer();
+                //           },
+                //           child: GestureDetector(
+                //             onTap: () {
+                //               _openSms();
+                //             },
+                //             child: OptionButton(
+                //               text: "Call", 
+                //               icon: Icons.call, 
+                //               width: size.width*0.35,),
+                //           )),
+                //       ],
+                //     ),
+                //   )
+                // ],
+          ),
         )
-      )
-    );
+          )
+        );
   }
 }
 void goToHome(context) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
