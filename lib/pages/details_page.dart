@@ -14,12 +14,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({ Key? key}) : super(key: key);
+  final String listingId;
+  const DetailsPage({ Key? key,required this.listingId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final listingID = ModalRoute.of(context)?.settings.arguments;
+    
     final CollectionReference ref = FirebaseFirestore.instance.collection('Kejani Listings');
-    final listing = ref.where('listingId', isEqualTo: listingID);
+    final listing = ref.where('listingId', isEqualTo: listingId);
     final Size size = MediaQuery.of(context).size;
     final ThemeData themeData = Theme.of(context);
     final DatabaseService databaseService = Get.put(DatabaseService(uid: ''));

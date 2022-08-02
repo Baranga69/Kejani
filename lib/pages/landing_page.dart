@@ -114,6 +114,7 @@ class _HomePageState extends State<HomePage> {
                     itemCount: databaseService.listingList.length,
                     itemBuilder: (BuildContext context, int index){
                       //final bool alreadySaved = 
+                      final String listingId;
                        Color color = Colors.black;
                         Widget infoSection = Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -128,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         );
                       return GestureDetector( 
-                        onTap: () => goToDetPage(context,"${"${databaseService.listingList[index].listingId}"}"),
+                        onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage(listingId: '${"${databaseService.listingList[index].listingId}"}',))),
                         child: Card(
                           borderOnForeground: true,
                           margin: const EdgeInsets.fromLTRB(2, 5, 2, 5),
@@ -304,7 +305,7 @@ class _HomePageState extends State<HomePage> {
         );
       });
   }
-  void goToDetPage(context, String listingId) => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DetailsPage()));
+
 
   
 

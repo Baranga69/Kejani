@@ -20,7 +20,7 @@ class CardDetails extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
 
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestoreCall.collection('Kejani Listings').where('listingId', isEqualTo: listingId).snapshots(),
+      stream: _firestoreCall.collection('Kejani Listings').snapshots(),
       builder: (context, snapshot){
         if (!snapshot.hasData){
           return Center(
@@ -34,23 +34,22 @@ class CardDetails extends StatelessWidget {
             ),
           );
         }
-        final listingInfo = snapshot.data!.docs;
-        listingInfo.forEach((element) {
-          final listName = element['Listing Name'];
-          final listAdd = element['Listing Address'];
-          final listAmt = element['Amount'];
-          final listBeds = element['BedroomNo'];
-          final listBaths = element['BathroomNo'];
-          final listArea = element['Area'];
-          final listImg = element['imageUrl'];
-          final listDesc = element['Description'];
-        });
+       CollectionReference colref = FirebaseFirestore.instance.collection('Kejani Listings');
+    
         return SafeArea(
           child: Scaffold(
             backgroundColor: COLOR_WHITE,
             body: Container(
               width: size.width,
               height: size.height,
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: ListView(
+                  children: [
+                    Image.network('')
+                  ],
+                ),
+              ),
             ),
           ),
         );
